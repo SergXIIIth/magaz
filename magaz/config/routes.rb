@@ -1,4 +1,8 @@
 Magaz::Application.routes.draw do
+  root to: 'magaz/admin/products#index'
+  match '/auth/:provider/callback', to: 'magaz/admin/sessions#create'
+
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

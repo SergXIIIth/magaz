@@ -1,0 +1,26 @@
+boby
+  h1 Hello
+
+  p: a href='/auth/developer' Login via developer
+  p: a href='/auth/twitter' Login via twitter
+
+  p
+    'line1
+    a href="//gfg" moi
+    |  line2
+
+  - less
+    h2 Loginc less!
+
+  p Posts
+  - posts
+    p Title #{title}
+    - comments
+      p Comment #{txt}
+
+  p Nums
+  - nums
+    p Num #{self}
+
+  = fn23
+    p = name

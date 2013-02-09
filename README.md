@@ -33,3 +33,9 @@ Technology
 - View in slim logic less mode
 - Skins creation mostly via CSS
 - Use free services MongoHQ 500Mb, Cloudinary 500Mb
+
+
+License
+--------
+
+Magaz is released under the [MIT License](http://www.opensource.org/licenses/MIT)
