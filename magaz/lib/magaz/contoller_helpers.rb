@@ -24,7 +24,9 @@ module Magaz
       end
 
       def current_user
-        @current_user ||= User.first(auth_token: cookies[:auth_token]) if cookies[:auth_token]
+        p cookies[:user_id]
+        p User.where(id: cookies[:user_id]).first
+        @current_user ||= User.where(id: cookies[:user_id]).first if cookies[:user_id]
       end
       
       def current_user?
