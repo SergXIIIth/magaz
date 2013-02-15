@@ -1,6 +1,10 @@
 Magaz::Application.routes.draw do
   root to: 'magaz/admin/products#index'
+
   match '/auth/:provider/callback', to: 'magaz/admin/sessions#create'
+  match '/auth/failure', to: 'magaz/admin/sessions#failure'
+
+  get '/login', to: 'magaz/admin/sessions#new', as: 'login'
 
   
   # The priority is based upon order of creation:

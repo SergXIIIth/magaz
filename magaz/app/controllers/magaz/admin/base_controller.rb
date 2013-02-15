@@ -7,7 +7,9 @@ module Magaz
 
       layout 'admin'
 
-      #include Magaz::ContollerHelpers
+      before_filter :authenticate
+
+      include Magaz::ContollerHelpers
 
     end
   end

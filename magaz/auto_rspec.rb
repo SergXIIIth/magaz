@@ -29,7 +29,7 @@ FileMonitor.watch dir do
   # The commands will be runned when file changed
   # the events contains all file modified infomation in last 0.2 second
   exec {|events|
-    p '----------------------------   rspec runing...  ---------------------------------'
+    p '------------------------------------------   rspec runing... '
     system 'bundle exec rspec'
   }
 end
