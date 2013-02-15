@@ -1,9 +1,7 @@
 # -*- encoding : utf-8 -*-
 module Magaz
   module Admin
-    class ProductsController < ApplicationController
-
-      layout 'admin'
+    class ProductsController < Magaz::Admin::BaseController
 
       def index
         @less = true

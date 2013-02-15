@@ -15,12 +15,12 @@ gem 'omniauth-facebook'
 gem 'omniauth-odnoklassniki'
 
 
-gem 'rspec-rails', :group => [:test, :development]
-gem 'factory_girl_rails', :group => [:test, :development]
-
-group :development do
+group :test, :development do
+  gem 'capybara'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+  gem 'file-monitor'
 end
-
 
 group :assets do
   gem 'sass-rails'
