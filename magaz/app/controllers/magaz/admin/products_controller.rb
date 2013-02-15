@@ -11,6 +11,7 @@ module Magaz
                   ]
         @nums = [1,2,3]
 
+        @name_variable = current_user.name
       end
 
     end
