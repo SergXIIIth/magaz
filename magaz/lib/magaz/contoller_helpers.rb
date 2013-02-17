@@ -24,8 +24,6 @@ module Magaz
       end
 
       def current_user
-        p cookies[:user_id]
-        p User.where(id: cookies[:user_id]).first
         @current_user ||= User.where(id: cookies[:user_id]).first if cookies[:user_id]
       end
       

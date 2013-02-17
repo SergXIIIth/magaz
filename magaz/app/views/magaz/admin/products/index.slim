@@ -1,8 +1,8 @@
 boby
   h1 Hello
 
-  h2 Wellcome #{name_variable}
-  h2 Wellcome #{current_user.name}
+  - current_user
+    h2 Wellcome #{name} <#{email}>
 
   p: a href='/auth/developer' Login via developer
   p: a href='/auth/twitter' Login via twitter

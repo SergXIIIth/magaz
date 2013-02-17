@@ -10,8 +10,6 @@ module Magaz
                   {title: '2', comments: [{txt: 'z'}, {txt: 'x'}]},
                   ]
         @nums = [1,2,3]
-
-        @name_variable = current_user.name
       end
 
     end
