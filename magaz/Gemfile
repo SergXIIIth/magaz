@@ -13,7 +13,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
 gem 'omniauth-facebook'
 gem 'omniauth-odnoklassniki'
-
+gem 'omniauth-google-oauth2'
 
 group :test, :development do
   gem 'capybara'
@@ -23,6 +23,7 @@ group :test, :development do
 end
 
 group :assets do
+  gem 'bootstrap-sass'
   gem 'sass-rails'
   gem 'coffee-rails'
 

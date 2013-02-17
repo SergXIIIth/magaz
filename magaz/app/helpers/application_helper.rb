@@ -5,11 +5,11 @@ module ApplicationHelper
   end
 
   def admin_stylesheet
-    stylesheet_link_tag "magaz/admin/application"
+    stylesheet_link_tag "magaz/admin/admin"
   end
 
   def admin_javascript
-    javascript_include_tag "magaz/admin/application"
+    javascript_include_tag "magaz/admin/admin"
   end
 
 end
