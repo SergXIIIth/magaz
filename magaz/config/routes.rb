@@ -5,6 +5,10 @@ Magaz::Application.routes.draw do
   match '/auth/failure', to: 'magaz/admin/sessions#failure'
 
   get '/login', to: 'magaz/admin/sessions#new', as: 'login'
+  get '/logout', to: 'magaz/admin/sessions#destroy', as: 'logout'
+
+  get '/fill_email', to: 'magaz/admin/users#fill_email', as: 'fill_email'
+  post '/fill_email', to: 'magaz/admin/users#fill_email_post'
 
   
   # The priority is based upon order of creation:

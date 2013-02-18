@@ -2,12 +2,20 @@
 require 'spec_helper'
 
 describe Magaz::Admin::SessionsController do
-  it 'new' do
-    visit '/auth/developer'
-    fill_in 'name', with: 'Sergey Makridenkov'
-    fill_in 'email', with: 'sergey@makridenkov.com'
-    click_on 'Sign In'
+  
+  it 'login' do
+    visit login_path
+    find('.vkontakte').click
 
-    page.should have_content 'Sergey Makridenkov'
+    page.should have_content 'Sergey'
+    page.should have_content 'Makridenkov'
+  end
+
+  it 'login without email' do
+    OmniAuth.config.mock_auth[:vkontakte][:info][:email] = ''
+    visit login_path
+    find('.vkontakte').click
+
+    page.should have_content 'Ваши данные'
   end
 end

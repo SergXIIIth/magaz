@@ -16,6 +16,7 @@ gem 'omniauth-odnoklassniki'
 gem 'omniauth-google-oauth2'
 
 group :test, :development do
+  gem 'launchy'
   gem 'capybara'
   gem 'rspec-rails'
   gem 'factory_girl_rails'

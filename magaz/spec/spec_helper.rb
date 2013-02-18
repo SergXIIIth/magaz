@@ -38,6 +38,23 @@ RSpec.configure do |config|
 
   config.order = "random"
 
-  config.before(:all) { Mongoid.purge! }
+  config.before(:all) { 
+    Mongoid.purge!
+
+    user = FactoryGirl.build(:user)
+   
+    OmniAuth.config.mock_auth[:vkontakte] = OmniAuth::AuthHash.new(
+      provider:   user.provider,
+      uid:        user.uid,
+      extra:      {raw: {}},
+      info:       {
+                    first_name: user.name, 
+                    last_name:  user.surname, 
+                    email:      user.email,
+                  }
+    )
+
+    OmniAuth.config.test_mode = true
+  }
   
 end

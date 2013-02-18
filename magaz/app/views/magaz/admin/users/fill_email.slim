@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    title Manaz - open source e-commerce platform
+
+    = render_head
+
+    coffee:
+      $ ->
+        $(document).ajaxSend (e, xhr, options) ->
+          token = $("meta[name='csrf-token']").attr('content')
+          xhr.setRequestHeader('X-CSRF-Token', token)
+
+        $('.btn-primary').click ->
+          $('.error-email').slideUp()
+          $.post window.location.href, $('.form-signin :input').serializeArray(), (response) ->
+            console.log response
+            if response.redirect
+              window.location.href = response.redirect
+            if response.error_email
+              $('.error-email').slideDown()
+          false
+
+  body.signin
+    .container
+      .form-signin
+        h2.form-signin-heading Ваши данные
+        - current_user_temp
+          input type='hidden' value=user_id_encrypted
+          input.input-block-level type='email' name='email' placeholder='ваш email' value=email
+          input.input-block-level type='text' name='name' placeholder='ваше имя' value=name
+          input.input-block-level type='text' name='surname' placeholder='ваша фамилия' value=surname
+        .error-email.hide.label.label-warning
+          |Пожалуйста, заполните email
+        a.btn.btn-primary href='#' Продолжить

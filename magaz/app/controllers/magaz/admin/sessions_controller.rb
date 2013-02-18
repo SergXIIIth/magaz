@@ -14,9 +14,14 @@ module Magaz
         user = User.where(provider: auth["provider"], uid: auth["uid"]).first
         user ||= User.create_with_omniauth(auth)
 
-        cookies[:user_id] = user.id.to_s
-
-        redirect_to root_url, :notice => "Signed in!"
+        # ask user fill email if it empty
+        if user.email.blank?
+          session[:user_id_temp] = user.id
+          redirect_to fill_email_url
+        else
+          session[:user_id] = user.id.to_s
+          redirect_to root_url, :notice => "Signed in!"
+        end
       end
 
       def failure
