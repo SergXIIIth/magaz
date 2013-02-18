@@ -2,7 +2,7 @@ module Magaz
   module Admin
     module BaseHelper
       def favicon
-        favicon_link_tag 'logo.png'
+        favicon_link_tag 'magaz/logo.png'
       end
 
       def stylesheet

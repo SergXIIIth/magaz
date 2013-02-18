@@ -15,7 +15,7 @@ FileMonitor.watch dir do
   # do not watch directory contains git and svn
   # the last charactor '/' has been trimmed
   dirs {
-    disallow /git$/
+    disallow /git|tmp$/
   }
 
   # record ruby files only
@@ -28,8 +28,10 @@ FileMonitor.watch dir do
 
   # The commands will be runned when file changed
   # the events contains all file modified infomation in last 0.2 second
-  exec {|events|
-    p '------------------------------------------   rspec runing... '
+  exec { |events|
+    p '+--------------------------------------------------------+'
+    p '|                   rspec runing...                      |'
+    p '+--------------------------------------------------------+'
     system 'bundle exec rspec'
   }
 end

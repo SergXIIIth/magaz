@@ -5,9 +5,18 @@ require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
 
+# Capybara.javascript_driver = :selenium
+# Capybara.default_driver = :rack_test
+Capybara.default_driver = :selenium
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+
+def login
+    visit login_path
+    find('.vkontakte').click 
+end
 
 RSpec.configure do |config|
   # ## Mock Framework
@@ -38,7 +47,7 @@ RSpec.configure do |config|
 
   config.order = "random"
 
-  config.before(:all) { 
+  config.before(:each) { 
     Mongoid.purge!
 
     user = FactoryGirl.build(:user)
