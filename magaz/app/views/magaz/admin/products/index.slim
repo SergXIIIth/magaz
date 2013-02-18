@@ -1,44 +1,51 @@
-.container
-  h1 Hello
+doctype html
+html
+  head
+    title Manaz - open source e-commerce platform
+    = render_head
 
-  .well
-    - current_user
-      h2 Wellcome #{name} #{surname}
-      
-      - email
-        p Email '#{email}'
-      -! email
-        p.muted Email is empty
-      
-      - avatar_url
-        p: img src=avatar_url
-      
-      p Provider #{provider}
-      p Uid #{uid}
+  body
+    .container
+      h1 Hello
 
-  p: a href='/auth/twitter' Login via twitter
-  p: a href='/auth/facebook' Login via Facebook
-  p: a href='/auth/vkontakte' Login via Vk
-  p: a href='/auth/odnoklassniki' Login via Odnoklassniki
-  p: a href='/auth/google_oauth2' Login via Gmail
+      .well
+        - current_user
+          h2 Wellcome #{name} - #{surname}
+          
+          - email
+            p Email '#{email}'
+          -! email
+            p.muted Email is empty
+          
+          - avatar_url
+            p: img src=avatar_url
+          
+          p Provider #{provider}
+          p Uid #{uid}
 
-  p
-    'line1
-    a href="//gfg" moi
-    |  line2
+      p: a href='/auth/twitter' Login via twitter
+      p: a href='/auth/facebook' Login via Facebook
+      p: a href='/auth/vkontakte' Login via Vk
+      p: a href='/auth/odnoklassniki' Login via Odnoklassniki
+      p: a href='/auth/google_oauth2' Login via Gmail
 
-  - less
-    h2 Loginc less!
+      p
+        'line1
+        a href="//gfg" moi
+        |  line2
 
-  p Posts
-  - posts
-    p Title #{title}
-    - comments
-      p Comment #{txt}
+      - less
+        h2 Loginc less!
 
-  p Nums
-  - nums
-    p Num #{to_s}
+      p Posts
+      - posts
+        p Title #{title}
+        - comments
+          p Comment #{txt}
 
-  = fn23
-    p = name
+      p Nums
+      - nums
+        p Num #{to_s}
+
+      = fn23
+        p = name

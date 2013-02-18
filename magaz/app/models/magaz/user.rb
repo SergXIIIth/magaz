@@ -20,9 +20,11 @@ module Magaz
 
         user.name       = auth['info']['first_name']
         user.surname    = auth['info']['last_name']
+
         if user.name.blank?
-          user.name     = auth['info']['name']
-          user.surname  = nil
+          name, surname = auth['info']['name'].split(' ')
+          user.name     = name
+          user.surname  = surname
         end
 
         user.avatar_url = auth['info']['image']
