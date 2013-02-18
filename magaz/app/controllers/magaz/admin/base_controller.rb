@@ -5,7 +5,7 @@ module Magaz
 
       protect_from_forgery
 
-      layout 'admin'
+      layout false
 
       before_filter :authenticate
 

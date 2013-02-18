@@ -19,8 +19,11 @@ module Magaz
         user.uid        = auth['uid']
 
         user.name       = auth['info']['first_name']
-        user.name       = auth['info']['name'] if user.name.blank?
         user.surname    = auth['info']['last_name']
+        if user.name.blank?
+          user.name     = auth['info']['name']
+          user.surname  = nil
+        end
 
         user.avatar_url = auth['info']['image']
         user.email      = auth['info']['email']

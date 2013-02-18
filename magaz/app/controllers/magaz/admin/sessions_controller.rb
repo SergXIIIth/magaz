@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 module Magaz
   module Admin
-    class SessionsController < ApplicationController
+    class SessionsController < BaseController
 
-      layout 'admin'
+      skip_before_filter :authenticate, only: [:new, :create]
 
       def new
       end
