@@ -6,4 +6,14 @@ html
   body
     = render_main_menu
     .container
-      h1 Products
+      h1 Товары #{count}
+      p
+        a.btn.btn-primary href=new_admin_product_path Добавить товар
+      ul.unstyled
+        - products
+          li
+            a href=edit_path
+              - name
+                = name
+              - !name
+                |Без имени

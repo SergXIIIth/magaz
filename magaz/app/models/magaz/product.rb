@@ -4,6 +4,9 @@ module Magaz
     include Mongoid::Timestamps
 
     field :name       , type: String
-    field :price      , type: Integer
+    field :price      , type: Money
+    field :amount     , type: Integer
+    field :desc       , type: String
+    
   end
 end

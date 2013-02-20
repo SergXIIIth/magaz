@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title Manaz - open source e-commerce platform
+    = render_head
+  body
+    = render_main_menu
+    .container
+      h1 Товар
+      - product
+        form action=save_product_path method="post"
+          = csrf_token
+          label Название
+          input type='text' name='name' value=name
+          label Цена
+          input type='text' name='price' value=price
+          label Количество
+          input type='text' name='amount' value=amount
+          label Описание
+          textarea name='desc' =desc
+          p
+            input.btn.btn-primary type='submit' value='Сохранить'
+            a.btn href=admin_products_path Назад

@@ -2,7 +2,10 @@ Magaz::Application.routes.draw do
   root to: 'magaz/admin/base#index'
 
   namespace :admin, module: 'magaz/admin' do
-    resources :products
+    resources :products do
+      post '', to: 'products#save', as: 'save', on: :member
+    end
+
     resources :orders
     resources :users
   end
