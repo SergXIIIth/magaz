@@ -1,0 +1,21 @@
+        root        /                                  magaz/admin/base#index
+    products GET    /admin/products(.:format)          products#index
+             POST   /admin/products(.:format)          products#create
+ new_product GET    /admin/products/new(.:format)      products#new
+edit_product GET    /admin/products/:id/edit(.:format) products#edit
+     product GET    /admin/products/:id(.:format)      products#show
+             PUT    /admin/products/:id(.:format)      products#update
+             DELETE /admin/products/:id(.:format)      products#destroy
+      orders GET    /admin/orders(.:format)            orders#index
+             POST   /admin/orders(.:format)            orders#create
+   new_order GET    /admin/orders/new(.:format)        orders#new
+  edit_order GET    /admin/orders/:id/edit(.:format)   orders#edit
+       order GET    /admin/orders/:id(.:format)        orders#show
+             PUT    /admin/orders/:id(.:format)        orders#update
+             DELETE /admin/orders/:id(.:format)        orders#destroy
+                    /auth/:provider/callback(.:format) magaz/admin/sessions#create
+auth_failure        /auth/failure(.:format)            magaz/admin/sessions#failure
+       login GET    /login(.:format)                   magaz/admin/sessions#new
+      logout GET    /logout(.:format)                  magaz/admin/sessions#destroy
+  fill_email GET    /fill_email(.:format)              magaz/admin/users#fill_email
+             POST   /fill_email(.:format)              magaz/admin/users#fill_email_post

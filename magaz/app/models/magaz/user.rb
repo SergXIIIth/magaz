@@ -13,6 +13,10 @@ module Magaz
 
     field :omni_auth_raw        , type: Hash
 
+    def fullname
+      "#{name} #{surname}"
+    end
+
     def self.create_with_omniauth(auth)
       create! do |user|
         user.provider   = auth['provider']

@@ -11,6 +11,9 @@ module Magaz
 
       include Magaz::ContollerHelpers
 
+      def index
+        redirect_to admin_orders_path
+      end
     end
   end
 end

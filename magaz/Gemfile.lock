@@ -88,6 +88,12 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.21)
+    money (5.1.0)
+      i18n (~> 0.6.0)
+    money-rails (0.8.0)
+      activesupport (>= 3.0)
+      money (~> 5.1.0)
+      railties (>= 3.0)
     mongoid (3.0.19)
       activemodel (~> 3.1)
       moped (~> 1.2)
@@ -223,6 +229,7 @@ DEPENDENCIES
   factory_girl_rails
   file-monitor
   launchy
+  money-rails
   mongoid
   omniauth
   omniauth-facebook

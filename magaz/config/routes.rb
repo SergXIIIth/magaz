@@ -1,5 +1,11 @@
 Magaz::Application.routes.draw do
-  root to: 'magaz/admin/products#index'
+  root to: 'magaz/admin/base#index'
+
+  namespace :admin, module: 'magaz/admin' do
+    resources :products
+    resources :orders
+    resources :users
+  end
 
   match '/auth/:provider/callback', to: 'magaz/admin/sessions#create'
   match '/auth/failure', to: 'magaz/admin/sessions#failure'
