@@ -9,6 +9,10 @@ gem 'coffee-views'
 gem 'draper'
 gem 'money-rails'
 
+gem 'carrierwave'
+gem 'cloudinary'
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
