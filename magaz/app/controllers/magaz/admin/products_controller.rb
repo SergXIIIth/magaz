@@ -24,7 +24,7 @@ module Magaz
         @product.price      = params[:price]
         @product.amount     = params[:amount]
         @product.desc       = params[:desc]
-        @product.image_ids  = params[:image_ids]
+        @product.image_ids  = params[:image_ids].split(',')
         @product.save!
 
         redirect_to admin_products_path
