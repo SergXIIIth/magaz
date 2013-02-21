@@ -1,6 +1,20 @@
 module Magaz
   module Admin
     module BaseHelper
+
+      def render_image_uploader(images, field_image_ids_name = 'image_ids')
+        @images = images
+        @field_image_ids_name = field_image_ids_name
+
+        render 'magaz/admin/shared/image_uploader'
+      end
+
+      def render_image_thumbnail(image)
+        @image = image
+        render "magaz/admin/shared/image_thumbnail"
+      end
+
+
       def favicon
         favicon_link_tag 'magaz/logo.png'
       end
@@ -11,6 +25,10 @@ module Magaz
 
       def javascript
         javascript_include_tag "magaz/admin/admin"
+      end
+
+      def jquery_fileupload_tag
+        javascript_include_tag "jquery.fileupload"
       end
 
       def render_head

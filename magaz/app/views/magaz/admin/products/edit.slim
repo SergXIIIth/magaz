@@ -9,15 +9,23 @@ html
       h1 Товар
       - product
         form action=save_product_path method="post"
-          = csrf_token
-          label Название
-          input type='text' name='name' value=name
-          label Цена
-          input type='text' name='price' value=price
-          label Количество
-          input type='text' name='amount' value=amount
-          label Описание
-          textarea name='desc' =desc
-          p
-            input.btn.btn-primary type='submit' value='Сохранить'
-            a.btn href=admin_products_path Назад
+          .row
+            .span6
+              = csrf_token
+              input type='hidden' name='image_ids'
+              p = inspect
+              label Название
+              input type='text' name='name' value=name
+              label Цена
+              input type='text' name='price' value=price
+              label Количество
+              input type='text' name='amount' value=amount
+              label Описание
+              textarea name='desc' =desc
+            .span6
+              h2 Картинки
+              = render_image_uploader
+          .row
+            .pull-right
+              input.btn.btn-primary type='submit' value='Сохранить'
+              a.btn href=admin_products_path Назад

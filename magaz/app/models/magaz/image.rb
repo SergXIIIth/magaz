@@ -9,6 +9,10 @@ module Magaz
 
     before_destroy :remove_could_data
 
+    def thumbnail_url
+      data_url(:thumbnail)
+    end
+
     private 
 
     def remove_could_data

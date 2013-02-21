@@ -2,6 +2,15 @@ require 'file-monitor'
 
 dir = ARGV[0] || '.'
 
+def run_rspec
+    p '+--------------------------------------------------------+'
+    p '|                   rspec runing...                      |'
+    p '+--------------------------------------------------------+'
+    system 'bundle exec rspec'
+end
+
+run_rspec
+
 # watch current working directory
 FileMonitor.watch dir do
 
@@ -28,10 +37,6 @@ FileMonitor.watch dir do
 
   # The commands will be runned when file changed
   # the events contains all file modified infomation in last 0.2 second
-  exec { |events|
-    p '+--------------------------------------------------------+'
-    p '|                   rspec runing...                      |'
-    p '+--------------------------------------------------------+'
-    system 'bundle exec rspec'
-  }
+  exec { |events| run_rspec }
 end
+

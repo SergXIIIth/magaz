@@ -7,10 +7,6 @@ html
 
     coffee:
       $ ->
-        $(document).ajaxSend (e, xhr, options) ->
-          token = $("meta[name='csrf-token']").attr('content')
-          xhr.setRequestHeader('X-CSRF-Token', token)
-
         $('.btn-primary').click ->
           $('.error-email').slideUp()
           $.post window.location.href, $('.form-signin :input').serializeArray(), (response) ->
