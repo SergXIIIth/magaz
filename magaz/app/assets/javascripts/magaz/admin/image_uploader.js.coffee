@@ -4,16 +4,9 @@ window.Magaz = window.Magaz || {}
 Magaz = window.Magaz
 Magaz.Admin = Magaz.Admin || {}
 
-Magaz.Admin.image_upload = ->
-  update_image_ids_field = ->
-    values = []
-    for image in $(".thumbnails [data-id]")
-      values.push($(image).data('id'))
+Crop = {}
 
-    field = $("[name='#{ImageUpload.field_image_ids_name}']")
-    field.val(values)
-
-  crop_preview = (img, selection) ->
+Crop.preview = (img, selection) ->
     if (!selection.width || !selection.height)
         return;
 
@@ -32,29 +25,58 @@ Magaz.Admin.image_upload = ->
         marginTop: -Math.round(scaleY * selection.y1),
         'max-width': 'initial'
 
-  init_img_events = (imgs) ->
-    $('.remove-btn', imgs).click ->
-      img = $(@).closest('.thumbnail')
-      img_id = img.data('id')
+Crop.after_select = (img, selection) ->
+  Crop.preview(img, selection)
 
-      $.deleteajax "/admin/images/#{img_id}"
+Crop.init = (img) ->
+  imgW = $(img).width()
+  imgH = $(img).height()
 
-      img.slideUp('slow', -> img.remove())
+  initCrop = if imgW < imgH then imgW else imgH
 
-      false
+  $(img).imgAreaSelect
+    handles: true,
+    aspectRatio: '1:1'
+    onSelectEnd: Crop.after_select
+    onInit: Crop.after_select
+    x1: 0
+    y1: 0 
+    x2: initCrop
+    y2: initCrop
+    fadeSpeed: 200
 
-    croper = $('.origin', imgs).imgAreaSelect
-                handles: true,
-                aspectRatio: '1:1'
-                onSelectEnd: crop_preview
-                onInit: crop_preview
-                x1: 0
-                y1: 0 
-                x2: 100
-                y2: 100
-                fadeSpeed: 200
-                instance: true
+  imgH = $(img).height()
 
+  initCrop = if imgW < imgH then imgW else imgH
+
+  $(img).imgAreaSelect
+    handles: true,
+    aspectRatio: '1:1'
+    onSelectEnd: Crop.after_select
+    onInit: Crop.after_select
+    x1: 0
+    y1: 0 
+    x2: initCrop
+    y2: initCrop
+    fadeSpeed: 200
+
+update_image_ids_field = ->
+  values = []
+  for image in $(".thumbnails [data-id]")
+    values.push($(image).data('id'))
+  field = $("[name='#{ImageUpload.field_image_ids_name}']")
+  field.val(values)
+
+init_img_events = (imgs) ->
+  $('.remove-btn', imgs).click ->
+    img = $(@).closest('.thumbnail')
+    img_id = img.data('id')
+    $.deleteajax "/admin/images/#{img_id}"
+    img.slideUp('slow', -> img.remove())
+    false
+  $('.origin', imgs).each (i, img) -> Crop.init(img)
+
+Magaz.Admin.image_upload = ->
   $('.image-file').fileupload(
     type: 'POST'
     dataType: 'html',
@@ -63,10 +85,8 @@ Magaz.Admin.image_upload = ->
       $('.progress .bar').css('width', progress + '%')
     done: (e, data) ->
       img_html = data.result
-
       img = $(img_html).appendTo('.thumbnails')
       init_img_events(img)
-
       update_image_ids_field()
     start: ->
       $('.progress').slideDown()
@@ -81,5 +101,3 @@ Magaz.Admin.image_upload = ->
     false
 
   init_img_events($('.upload .thumbnail'))
-
-
