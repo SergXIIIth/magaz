@@ -14,7 +14,6 @@ module Magaz
         render "magaz/admin/shared/image_thumbnail"
       end
 
-
       def favicon
         favicon_link_tag 'magaz/logo.png'
       end
@@ -25,10 +24,6 @@ module Magaz
 
       def javascript
         javascript_include_tag "magaz/admin/admin"
-      end
-
-      def jquery_fileupload_tag
-        javascript_include_tag "jquery.fileupload"
       end
 
       def render_head
