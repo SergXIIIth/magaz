@@ -24,7 +24,7 @@ module Magaz
         @product.price      = params[:price]
         @product.amount     = params[:amount]
         @product.desc       = params[:desc]
-        @product.image_ids  = params[:image_ids].split(',')
+        @product.image_ids  = ImageJson.parse_ids_and_save_crop(params[:image_ids])
         @product.save!
 
         redirect_to admin_products_path

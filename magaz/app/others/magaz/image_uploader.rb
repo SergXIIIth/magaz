@@ -5,7 +5,7 @@ module Magaz
     include ::Cloudinary::CarrierWave
 
     cloudinary_transformation :transformation => [
-        {:width => 1000, :height => 1200, :crop => :limit}
+        {:width => 1024, :height => 1024, :crop => :limit}
       ]
 
     def public_id
@@ -13,11 +13,11 @@ module Magaz
     end  
 
     version :standard do
-      process :resize_to_fit => [600, 400, :north]
+      process :resize_to_fit => [600, 600, :north]
     end
     
     version :thumbnail do
-      process :resize_to_fill => [260, 180, :north]
+      process :resize_to_fill => [100, 100, :north]
     end
 
     # Include RMagick or MiniMagick support:

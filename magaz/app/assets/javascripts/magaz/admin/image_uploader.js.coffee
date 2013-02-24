@@ -6,6 +6,11 @@ Magaz.Admin = Magaz.Admin || {}
 
 Crop = {}
 
+Crop.update_crop_json = (img, selection) ->
+  thumbnail = $(img).closest('[data-id]')
+  thumbnail.attr('data-crop', JSON.stringify(selection))
+  update_image_ids_field()
+
 Crop.preview = (img, selection) ->
     if (!selection.width || !selection.height)
         return;
@@ -27,6 +32,7 @@ Crop.preview = (img, selection) ->
 
 Crop.after_select = (img, selection) ->
   Crop.preview(img, selection)
+  Crop.update_crop_json(img, selection)
 
 Crop.init = (img) ->
   imgW = $(img).width()
@@ -62,10 +68,13 @@ Crop.init = (img) ->
 
 update_image_ids_field = ->
   values = []
-  for image in $(".thumbnails [data-id]")
-    values.push($(image).data('id'))
+  for thumbnail in $(".thumbnails [data-id]")
+    values.push({
+      id: $(thumbnail).data('id'), 
+      crop: JSON.parse($(thumbnail).attr('data-crop'))
+      })
   field = $("[name='#{ImageUpload.field_image_ids_name}']")
-  field.val(values)
+  field.val(JSON.stringify(values))
 
 init_img_events = (imgs) ->
   $('.remove-btn', imgs).click ->
@@ -94,7 +103,7 @@ Magaz.Admin.image_upload = ->
       $('.progress').slideUp()
   )
 
-  update_image_ids_field()
+  #update_image_ids_field()
 
   $('.show-upload').click ->
     $('.upload-field').slideToggle()

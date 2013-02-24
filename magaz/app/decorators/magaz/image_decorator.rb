@@ -5,6 +5,5 @@ module Magaz
     def render_image_thumbnail
       h.render_image_thumbnail(self)
     end
-
   end
 end
