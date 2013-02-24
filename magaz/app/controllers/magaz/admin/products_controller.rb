@@ -20,11 +20,15 @@ module Magaz
       def save
         @product = Product.where(id: params[:id]).first || Product.new
 
+        image_saver = ImageSaver.new(params[:image_ids])
+        image_saver.delete_removed_on_client
+        image_saver.save_crop
+
         @product.name       = params[:name]
         @product.price      = params[:price]
         @product.amount     = params[:amount]
         @product.desc       = params[:desc]
-        @product.image_ids  = ImageJson.parse_ids_and_save_crop(params[:image_ids])
+        @product.image_ids  = image_saver.image_ids
         @product.save!
 
         redirect_to admin_products_path

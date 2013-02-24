@@ -4,6 +4,8 @@ module Magaz
     include Mongoid::Document
     include Mongoid::Timestamps
 
+    field :crop, type: Hash
+
     attr_accessible :data
     mount_uploader :data, ImageUploader
 
