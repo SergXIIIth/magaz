@@ -9,7 +9,14 @@ module Magaz
       @image_ids ||= @json.map{|item| item['id']}
     end
 
-    def delete_removed_on_client
+    def save(exist_images)
+      save_crop()
+      delete_removed_on_client(exist_images)
+    end
+
+    private
+
+    def delete_removed_on_client(exist_images)
     end
 
     def save_crop

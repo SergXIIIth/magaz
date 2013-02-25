@@ -14,15 +14,13 @@ module Magaz
 
       def edit
         @product = Product.find(params[:id]).decorate
-        # @hz = 'hz'
       end
 
       def save
         @product = Product.where(id: params[:id]).first || Product.new
 
         image_saver = ImageSaver.new(params[:image_ids])
-        image_saver.delete_removed_on_client
-        image_saver.save_crop
+        image_saver.save(@product.images)
 
         @product.name       = params[:name]
         @product.price      = params[:price]

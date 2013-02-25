@@ -11,6 +11,10 @@ module Magaz
 
     before_destroy :remove_could_data
 
+    def crop_json
+      crop.to_json
+    end
+
     private 
 
     def remove_could_data

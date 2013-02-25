@@ -35,36 +35,27 @@ Crop.after_select = (img, selection) ->
   Crop.update_crop_json(img, selection)
 
 Crop.init = (img) ->
-  imgW = $(img).width()
-  imgH = $(img).height()
+  initCrop = JSON.parse($(img).closest('.thumbnail').attr('data-crop'))
 
-  initCrop = if imgW < imgH then imgW else imgH
+  unless initCrop
+    imgW = $(img).width()
+    imgH = $(img).height()
 
-  $(img).imgAreaSelect
-    handles: true,
-    aspectRatio: '1:1'
-    onSelectEnd: Crop.after_select
-    onInit: Crop.after_select
-    x1: 0
-    y1: 0 
-    x2: initCrop
-    y2: initCrop
-    fadeSpeed: 200
+    xy2 = if imgW < imgH then imgW else imgH
 
-  imgH = $(img).height()
-
-  initCrop = if imgW < imgH then imgW else imgH
+    initCrop = { x1:0, y1:0, x2: xy2, y2: xy2}
 
   $(img).imgAreaSelect
     handles: true,
     aspectRatio: '1:1'
     onSelectEnd: Crop.after_select
     onInit: Crop.after_select
-    x1: 0
-    y1: 0 
-    x2: initCrop
-    y2: initCrop
+    x1: initCrop.x1
+    y1: initCrop.y1
+    x2: initCrop.x2
+    y2: initCrop.y2
     fadeSpeed: 200
+
 
 update_image_ids_field = ->
   values = []
