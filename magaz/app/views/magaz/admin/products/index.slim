@@ -10,8 +10,10 @@ html
       p
         a.btn.btn-primary href=new_admin_product_path Добавить товар
       - products
-        .product
-          p.lead
+        .product.row
+          .thumbnail.span2
+            img src=thumbnail_url
+          p.lead.span5
             a href=edit_path
               - name
                 = name

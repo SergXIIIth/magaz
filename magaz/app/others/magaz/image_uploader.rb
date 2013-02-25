@@ -4,9 +4,9 @@ module Magaz
 
     include ::Cloudinary::CarrierWave
 
-    cloudinary_transformation :transformation => [
-        {:width => 1024, :height => 1024, :crop => :limit}
-      ]
+    cloudinary_transformation :transformation => [{
+        :width => 1024, :height => 1024, :crop => :limit
+        }]
 
     def public_id
       return "#{model.class.to_s.underscore.gsub!('/', '_')}_#{model.id.to_s}"
@@ -19,6 +19,12 @@ module Magaz
     version :thumbnail do
       process :resize_to_fill => [100, 100, :north]
     end
+
+    def crop(size)
+        return :x => model.crop_x, :y => model.crop_y, 
+          :width => model.crop_width, :height => model.crop_height, :crop => :crop      
+    end
+
 
     # Include RMagick or MiniMagick support:
     # include CarrierWave::RMagick

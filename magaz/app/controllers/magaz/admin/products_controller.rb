@@ -8,7 +8,7 @@ module Magaz
       end
 
       def new
-        @product = Product.new
+        @product = Product.new.decorate
         render 'edit'
       end
 

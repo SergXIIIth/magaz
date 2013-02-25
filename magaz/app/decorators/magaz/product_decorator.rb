@@ -10,5 +10,8 @@ module Magaz
       h.render_image_uploader(source.images.decorate)
     end
 
+    def thumbnail_url
+      Thumbnail.url(source.images, 140)
+    end
   end
 end

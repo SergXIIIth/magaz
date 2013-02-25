@@ -3,6 +3,7 @@ module Magaz
     def initialize(json)
       @json = json
       @json = ActiveSupport::JSON.decode(json) if json.is_a? String
+      @json ||= {}
     end
 
     def image_ids
@@ -22,7 +23,11 @@ module Magaz
     def save_crop
       @json.each do |item|
         image = Image.find(item['id'])
-        image.crop = item['crop']
+        p image.inspect
+        image.crop_x = item['crop']['x1']
+        image.crop_y = item['crop']['y1']
+        image.crop_w = item['crop']['width']
+        image.crop_h = item['crop']['height']
         image.save!
       end
     end
