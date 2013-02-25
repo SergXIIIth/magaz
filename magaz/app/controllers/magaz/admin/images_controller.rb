@@ -11,11 +11,8 @@ module Magaz
 				render 'magaz/admin/shared/_image_thumbnail'
 			end
 
-			def destroy
-				image = Image.find(params[:id])
-				image.destroy
-
-				render json: true
+			def edit
+				@image = Image.find(params[:id])
 			end
 		end
 	end

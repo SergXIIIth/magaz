@@ -1,7 +1,10 @@
 - image
-  .thumbnail data-id=id data-crop=crop_json
-    a.remove-btn href='#' title='Удалить картинку'
-      i.icon-remove 
+  .thumbnail.span2 data-id=id data-crop=crop_json
     img.origin src=data_url
-    div style='width: 100px; height: 100px; overflow: hidden;'
-      img.preview src=data_url
+    .btn-group
+      a.btn.crop href='#' title='Обрезать картинку'
+        i.icon-pencil 
+      a.btn href='#' title='Переместить картинку'
+        i.icon-move
+      a.btn.remove href='#' title='Удалить картинку'
+        i.icon-trash 

@@ -16,6 +16,10 @@ module Magaz
     private 
 
     def cloudinary_url(image, size)
+      # http://res.cloudinary.com/makridenkov/image/upload/x_306,y_149,w_153,h_153,c_crop/w_140,h_140,c_fill/v1361798614/magaz_image_512b65d025cac25c83000003.png
+
+      # http://res.cloudinary.com/makridenkov/image/upload/v1361798614/magaz_image_512b65d025cac25c83000003.png
+
       # http://res.cloudinary.com/makridenkov/image/upload/v1361507477/magaz_image_5126f48f25cac2760400002c.png
 
       # http://res.cloudinary.com/makridenkov/image/upload/

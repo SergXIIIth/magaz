@@ -1,0 +1,18 @@
+coffee:
+  $ -> Magaz.Admin.Crop.init()
+.modal-header
+  .close data-dismiss="modal" type="button" &times;
+  h3 Картинка
+.modal-body
+  - image
+    .row.image-container data-id=id data-crop=crop_json
+      .span4
+        .thumbnail
+          img.origin src=data_url
+      .span2
+        p Иконка
+        div.thumbnail style='width: 100px; height: 100px; overflow: hidden;'
+          img.preview src=data_url
+.modal-footer
+  a.btn data-dismiss="modal" href="#" Закрыть
+  a.btn.btn-primary href="#" Сохранить

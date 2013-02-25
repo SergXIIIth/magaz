@@ -12,19 +12,18 @@ module Magaz
       return "#{model.class.to_s.underscore.gsub!('/', '_')}_#{model.id.to_s}"
     end  
 
-    version :standard do
-      process :resize_to_fit => [600, 600, :north]
-    end
+    # version :standard do
+    #   process :resize_to_fit => [600, 600, :north]
+    # end
     
-    version :thumbnail do
-      process :resize_to_fill => [100, 100, :north]
-    end
+    # version :thumbnail do
+    #   process :resize_to_fill => [100, 100, :north]
+    # end
 
-    def crop(size)
-        return :x => model.crop_x, :y => model.crop_y, 
-          :width => model.crop_width, :height => model.crop_height, :crop => :crop      
-    end
-
+    # def crop(size)
+    #     return :x => model.crop_x, :y => model.crop_y, 
+    #       :width => model.crop_width, :height => model.crop_height, :crop => :crop      
+    # end
 
     # Include RMagick or MiniMagick support:
     # include CarrierWave::RMagick

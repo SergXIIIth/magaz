@@ -1,62 +1,3 @@
-# Image upload
-
-window.Magaz = window.Magaz || {}
-Magaz = window.Magaz
-Magaz.Admin = Magaz.Admin || {}
-
-Crop = {}
-
-Crop.update_crop_json = (img, selection) ->
-  thumbnail = $(img).closest('[data-id]')
-  thumbnail.attr('data-crop', JSON.stringify(selection))
-  update_image_ids_field()
-
-Crop.preview = (img, selection) ->
-    if (!selection.width || !selection.height)
-        return;
-
-    thumbnail = $(img).closest('.thumbnail')
-    
-    originWidth = $('.origin', thumbnail).width()
-    originHeight = $('.origin', thumbnail).height()
-
-    scaleX = 100 / selection.width
-    scaleY = 100 / selection.height
-
-    $('.preview', thumbnail).css
-        width: Math.round(scaleX * originWidth),
-        height: Math.round(scaleY * originHeight),
-        marginLeft: -Math.round(scaleX * selection.x1),
-        marginTop: -Math.round(scaleY * selection.y1),
-        'max-width': 'initial'
-
-Crop.after_select = (img, selection) ->
-  Crop.preview(img, selection)
-  Crop.update_crop_json(img, selection)
-
-Crop.init = (img) ->
-  initCrop = JSON.parse($(img).closest('.thumbnail').attr('data-crop'))
-
-  unless initCrop
-    imgW = $(img).width()
-    imgH = $(img).height()
-
-    xy2 = if imgW < imgH then imgW else imgH
-
-    initCrop = { x1:0, y1:0, x2: xy2, y2: xy2}
-
-  $(img).imgAreaSelect
-    handles: true,
-    aspectRatio: '1:1'
-    onSelectEnd: Crop.after_select
-    onInit: Crop.after_select
-    x1: initCrop.x1
-    y1: initCrop.y1
-    x2: initCrop.x2
-    y2: initCrop.y2
-    fadeSpeed: 200
-
-
 update_image_ids_field = ->
   values = []
   for thumbnail in $(".thumbnails [data-id]")
@@ -68,13 +9,19 @@ update_image_ids_field = ->
   field.val(JSON.stringify(values))
 
 init_img_events = (imgs) ->
-  $('.remove-btn', imgs).click ->
+  $('.remove', imgs).click ->
     img = $(@).closest('.thumbnail')
-    img_id = img.data('id')
-    $.deleteajax "/admin/images/#{img_id}"
-    img.slideUp('slow', -> img.remove())
+    img.fadeOut('slow', -> img.remove(); update_image_ids_field();)
     false
-  $('.origin', imgs).each (i, img) -> Crop.init(img)
+
+  $('.crop, .origin', imgs).click ->
+    # open dialog for cropping
+    image_id = $(@).closest('.thumbnail').data('id')
+    modal = $('<div class="modal fade">Загрузка...</div>').appendTo('body')
+    modal.load("/admin/images/#{image_id}/edit")
+    modal.modal('show')
+    false
+
 
 Magaz.Admin.image_upload = ->
   $('.image-file').fileupload(
@@ -94,10 +41,9 @@ Magaz.Admin.image_upload = ->
       $('.progress').slideUp()
   )
 
-  #update_image_ids_field()
-
   $('.show-upload').click ->
     $('.upload-field').slideToggle()
     false
 
   init_img_events($('.upload .thumbnail'))
+  update_image_ids_field()

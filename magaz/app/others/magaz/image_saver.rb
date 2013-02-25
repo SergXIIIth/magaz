@@ -18,11 +18,16 @@ module Magaz
     private
 
     def delete_removed_on_client(exist_images)
+      exist_images.each do |img|
+        unless image_ids.include?(img.id.to_s)
+          img.delete
+        end
+      end
     end
 
     def save_crop
       @json.each do |item|
-        image = Image.find(item['id'])
+        image = Magaz::Image.find(item['id'])
         p image.inspect
         image.crop_x = item['crop']['x1']
         image.crop_y = item['crop']['y1']
