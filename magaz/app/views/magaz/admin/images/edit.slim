@@ -1,7 +1,7 @@
 coffee:
-  $ -> Magaz.Admin.Crop.init()
+  $('.modal .origin').load -> Magaz.Admin.Crop.init()
 .modal-header
-  .close data-dismiss="modal" type="button" &times;
+  .close data-dismiss="modal" &times;
   h3 Картинка
 .modal-body
   - image
@@ -15,4 +15,4 @@ coffee:
           img.preview src=data_url
 .modal-footer
   a.btn data-dismiss="modal" href="#" Закрыть
-  a.btn.btn-primary href="#" Сохранить
+  a.btn.save-btn.btn-primary href="#" Сохранить

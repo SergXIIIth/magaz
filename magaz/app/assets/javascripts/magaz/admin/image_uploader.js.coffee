@@ -16,10 +16,13 @@ init_img_events = (imgs) ->
 
   $('.crop, .origin', imgs).click ->
     # open dialog for cropping
-    image_id = $(@).closest('.thumbnail').data('id')
+    thumbnail = $(@).closest('.thumbnail')
     modal = $('<div class="modal fade">Загрузка...</div>').appendTo('body')
-    modal.load("/admin/images/#{image_id}/edit")
+    modal.load("/admin/images/#{thumbnail.data('id')}/edit")
     modal.modal('show')
+    modal.on 'crop-save', (e, crop) -> 
+      thumbnail.attr('data-crop', JSON.stringify(crop))
+      update_image_ids_field()
     false
 
 

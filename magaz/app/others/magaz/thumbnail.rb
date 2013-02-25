@@ -28,9 +28,7 @@ module Magaz
       base_url = "http://res.cloudinary.com/#{Cloudinary.config.cloud_name}/image/upload/"
       transformation = "x_#{image.crop_x},y_#{image.crop_y},w_#{image.crop_w},h_#{image.crop_h},c_crop/w_#{size},h_#{size},c_fill/"
 
-      url = base_url + transformation + image.data.identifier
-      p url
-      url 
+      base_url + transformation + image.data.identifier
     end
 
   end
