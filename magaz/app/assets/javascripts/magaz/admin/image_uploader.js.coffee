@@ -9,6 +9,9 @@ open_crop_modal = (thumbnail) ->
       update_image_ids_field()
       modal.modal('hide')
       false      
+      
+    $('[data-dismiss]', modal).click ->
+      crop.remove()
 
   modal.on 'hidden', -> 
     crop.remove()
