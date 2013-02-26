@@ -28,11 +28,12 @@ module Magaz
     def save_crop
       @json.each do |item|
         image = Magaz::Image.find(item['id'])
-        p image.inspect
+
         image.crop_x = item['crop']['x1']
         image.crop_y = item['crop']['y1']
         image.crop_w = item['crop']['x2'] - image.crop_x
         image.crop_h = item['crop']['y2'] - image.crop_y
+
         image.save!
       end
     end

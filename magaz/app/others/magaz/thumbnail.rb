@@ -26,7 +26,7 @@ module Magaz
       #    x_355,y_410,w_300,h_200,c_crop/w_150,h_100,c_fill/v1361507477/magaz_image_5126f48f25cac2760400002c.png
 
       base_url = "http://res.cloudinary.com/#{Cloudinary.config.cloud_name}/image/upload/"
-      transformation = "x_#{image.crop_x},y_#{image.crop_y},w_#{image.crop_w},h_#{image.crop_h},c_crop/w_#{size},h_#{size},c_fill/"
+      transformation = "x_#{image.crop_x},y_#{image.crop_y},w_#{image.crop_w},h_#{image.crop_h},c_crop/w_#{size},h_#{size},c_scale/"
 
       base_url + transformation + image.data.identifier
     end

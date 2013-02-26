@@ -1,3 +1,24 @@
+open_crop_modal = (thumbnail) ->
+  crop = null
+
+  modal = $('<div class="modal fade">Загрузка...</div>').appendTo('body')
+  modal.load "/admin/images/#{thumbnail.data('id')}/edit", ->
+    $('.save-btn', modal).click ->
+      thumbnail.attr('data-crop', JSON.stringify(crop.selection()))
+      crop.remove()
+      update_image_ids_field()
+      modal.modal('hide')
+      false      
+
+  modal.on 'hidden', -> 
+    crop.remove()
+    $(@).remove()
+
+  modal.on 'shown', ->
+     crop = Magaz.Admin.Crop(modal, JSON.parse(thumbnail.attr('data-crop')))
+
+  modal.modal('show')
+
 update_image_ids_field = ->
   values = []
   for thumbnail in $(".thumbnails [data-id]")
@@ -15,14 +36,7 @@ init_img_events = (imgs) ->
     false
 
   $('.crop, .origin', imgs).click ->
-    # open dialog for cropping
-    thumbnail = $(@).closest('.thumbnail')
-    modal = $('<div class="modal fade">Загрузка...</div>').appendTo('body')
-    modal.load("/admin/images/#{thumbnail.data('id')}/edit")
-    modal.modal('show')
-    modal.on 'crop-save', (e, crop) -> 
-      thumbnail.attr('data-crop', JSON.stringify(crop))
-      update_image_ids_field()
+    open_crop_modal($(@).closest('.thumbnail'))
     false
 
 

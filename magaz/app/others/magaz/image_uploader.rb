@@ -5,8 +5,8 @@ module Magaz
     include ::Cloudinary::CarrierWave
 
     cloudinary_transformation :transformation => [{
-        :width => 1024, :height => 1024, :crop => :limit
-        }]
+      :width => 1024, :height => 1024, :crop => :limit
+      }]
 
     def public_id
       return "#{model.class.to_s.underscore.gsub!('/', '_')}_#{model.id.to_s}"

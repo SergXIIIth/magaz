@@ -4,6 +4,11 @@ module Magaz
 		class ImagesController < Magaz::Admin::BaseController
 			def create
 				image = Image.new
+
+				# :public_id => 'sample'
+				# image_hash = Cloudinary::Uploader.upload(params[:image])
+				# image.data = "v#{version}/#{identifier.split("/").last}"
+
 				image.data = params[:image]
 				image.save!
 				

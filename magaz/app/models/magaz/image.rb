@@ -15,8 +15,6 @@ module Magaz
     before_destroy :remove_could_data
 
     def crop_json
-      p self
-
       crop = {
           x1: crop_x, 
           y1: crop_y, 
