@@ -12,17 +12,9 @@ module Magaz
 					:width => 1024, :height => 1024, :crop => :limit
 					)
 
-				p 'hash'
-				p image_hash
-
 				image.width 	= image_hash['width']
 				image.height 	= image_hash['height']
 				image.set(:data, "v#{image_hash['version']}/#{image_hash['url'].split("/").last}")
-
-				p 'data'
-				p image.data
-
-				p "raw data #{"v#{image_hash['version']}/#{image_hash['url'].split("/").last}"}"
 
 				# Thought CarrierWave image.data = params[:image]
 

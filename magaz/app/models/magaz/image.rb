@@ -33,6 +33,10 @@ module Magaz
       data.identifier
     end
 
+    def true_size_json
+      { width: width, height: height }.to_json
+    end
+
     private 
 
     def make_default_crop

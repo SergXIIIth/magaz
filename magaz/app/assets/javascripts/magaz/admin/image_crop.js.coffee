@@ -7,7 +7,9 @@ Magaz.Admin.Crop = (container, init_crop) ->
 
   origin_img    = $('.origin', container)
   preview_img   = $('.preview', container)
-  preview_size = preview_img.width()
+  preview_size  = preview_img.width()
+  true_size     = JSON.parse(origin_img.attr('data-true-size'))
+
 
   priview_init = ( ->
     preview_img.closest('.thumbnail').css
@@ -46,28 +48,19 @@ Magaz.Admin.Crop = (container, init_crop) ->
       marginTop: -Math.round(scaleY * selection.y1),
       'max-width': 'initial'
 
-  plugin = null
-
-  load_plugin_with_true_origin_size = ->
-    #Build a new Image Object outside the DOM
-    #that way, CSS won't affect it size
-    img = new Image()
-    img.onload = ->
-      plugin = $(origin_img).imgAreaSelect
-        handles: true
-        aspectRatio: '1:1'
-        onSelectEnd: preview
-        onInit: preview
-        x1: init_crop.x1
-        y1: init_crop.y1
-        x2: init_crop.x2
-        y2: init_crop.y2
-        fadeSpeed: 200
-        instance: true
-        imageHeight: img.height
-        imageWidth: img.width
-    img.src = preview_img.attr('src')
-  load_plugin_with_true_origin_size()
+  plugin = $(origin_img).imgAreaSelect
+    handles: true
+    aspectRatio: '1:1'
+    onSelectEnd: preview
+    onInit: preview
+    x1: init_crop.x1
+    y1: init_crop.y1
+    x2: init_crop.x2
+    y2: init_crop.y2
+    fadeSpeed: 200
+    instance: true
+    imageHeight: true_size.height
+    imageWidth: true_size.width
 
   crop.remove = ->
     $(origin_img).imgAreaSelect
