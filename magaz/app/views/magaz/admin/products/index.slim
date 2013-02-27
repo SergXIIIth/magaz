@@ -3,19 +3,33 @@ html
   head
     title Manaz - open source e-commerce platform
     = render_head
-  body
+  body.products-index
     = render_main_menu
     .container
-      h1 Товары #{count}
+      h1 Товары
       p
         a.btn.btn-primary href=new_admin_product_path Добавить товар
-      - products
-        .product.row
-          .thumbnail.span2
-            img src=thumbnail_url
-          p.lead.span5
-            a href=edit_path
-              - name
-                = name
-              - !name
-                |Без имени
+      .row
+        - products
+          .product
+            .span4
+              .row
+                .span2
+                  .thumbnail
+                    a href=edit_path
+                      img src=thumbnail_url
+                .span2
+                  p.lead
+                    a href=edit_path
+                      - name
+                        = name
+                      - !name
+                        |Без имени
+                  - price
+                    div
+                      span.w50 Цена 
+                      = price
+                  - amount
+                    div
+                      span.w50 Кол-во
+                      = amount
