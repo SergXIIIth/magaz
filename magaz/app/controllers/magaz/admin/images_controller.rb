@@ -5,11 +5,27 @@ module Magaz
 			def create
 				image = Image.new
 
-				# :public_id => 'sample'
-				# image_hash = Cloudinary::Uploader.upload(params[:image])
-				# image.data = "v#{version}/#{identifier.split("/").last}"
+				# Temp solution, since thought CarrierWave can not get widht, height
+				image_hash = Cloudinary::Uploader.upload(
+					params[:image],
+					public_id: "image_#{image.id}",
+					:width => 1024, :height => 1024, :crop => :limit
+					)
 
-				image.data = params[:image]
+				p 'hash'
+				p image_hash
+
+				image.width 	= image_hash['width']
+				image.height 	= image_hash['height']
+				image.set(:data, "v#{image_hash['version']}/#{image_hash['url'].split("/").last}")
+
+				p 'data'
+				p image.data
+
+				p "raw data #{"v#{image_hash['version']}/#{image_hash['url'].split("/").last}"}"
+
+				# Thought CarrierWave image.data = params[:image]
+
 				image.save!
 				
 				@image = image

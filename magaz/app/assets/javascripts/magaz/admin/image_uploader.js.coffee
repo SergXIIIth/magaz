@@ -1,9 +1,10 @@
 update_thumbnail_img = (thumbnail) ->
+  size = thumbnail.innerWidth()
   img = $('.origin', thumbnail)
   src = Magaz.Thumbnail.url(
     thumbnail.attr('data-cloudinary-identifier'), 
     JSON.parse(thumbnail.attr('data-crop')),
-    img.width()
+    size
     )
   img.attr('src', src)
 

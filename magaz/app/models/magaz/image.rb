@@ -4,15 +4,19 @@ module Magaz
     include Mongoid::Document
     include Mongoid::Timestamps
 
-    field :crop_x, type: Integer, default: 0
-    field :crop_y, type: Integer, default: 0
-    field :crop_w, type: Integer, default: 100
-    field :crop_h, type: Integer, default: 100
+    field :crop_x, type: Integer
+    field :crop_y, type: Integer
+    field :crop_w, type: Integer
+    field :crop_h, type: Integer
+
+    field :width  , type: Integer
+    field :height , type: Integer
 
     attr_accessible :data
     mount_uploader :data, ImageUploader
 
     before_destroy :remove_could_data
+    before_save :make_default_crop
 
     def crop_json
       crop = {
@@ -30,6 +34,17 @@ module Magaz
     end
 
     private 
+
+    def make_default_crop
+      if crop_x.nil?
+        size = width < height ? width : height
+
+        self.crop_x = 0
+        self.crop_y = 0
+        self.crop_h = size
+        self.crop_w = size
+      end
+    end
 
     def remove_could_data
       Cloudinary::Uploader.destroy(data.identifier)
