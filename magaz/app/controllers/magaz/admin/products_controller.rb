@@ -20,7 +20,7 @@ module Magaz
         @product = Product.where(id: params[:id]).first || Product.new
 
         image_saver = ImageSaver.new(params[:image_ids])
-        image_saver.save(@product.images)
+        image_saver.save(@product.images.to_a)
 
         @product.name       = params[:name]
         @product.price      = params[:price]

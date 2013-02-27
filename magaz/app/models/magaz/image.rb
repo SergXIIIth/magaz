@@ -11,12 +11,15 @@ module Magaz
 
     field :width  , type: Integer
     field :height , type: Integer
+    field :order  , type: Integer, default: 0
 
     attr_accessible :data
     mount_uploader :data, ImageUploader
 
     before_destroy :remove_could_data
     before_save :make_default_crop
+
+    default_scope asc(:order)
 
     def crop_json
       crop = {

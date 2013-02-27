@@ -87,5 +87,9 @@ Magaz.Admin.image_upload = ->
     $('.upload-field').slideToggle()
     false
 
+  $('.thumbnails')
+    .sortable(items: '.thumbnail')
+    .bind('sortupdate', update_image_ids_field) 
+
   init_img_events($('.upload .thumbnail'))
   update_image_ids_field()
