@@ -48,8 +48,10 @@ update_image_ids_field = ->
 
 init_img_events = (thumbnails) ->
   $('.remove', thumbnails).click ->
-    img = $(@).closest('.thumbnail')
-    img.fadeOut('slow', -> img.remove(); update_image_ids_field();)
+    thumbnail = $(@).closest('.thumbnail')
+    thumbnail.removeAttr('data-id')
+    update_image_ids_field()
+    thumbnail.fadeOut('slow', -> thumbnail.remove())
     false
 
   $('.crop, .origin', thumbnails).click ->

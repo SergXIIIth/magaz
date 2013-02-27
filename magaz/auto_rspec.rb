@@ -6,7 +6,7 @@ def run_rspec
     p '+--------------------------------------------------------+'
     p '|                   rspec runing...                      |'
     p '+--------------------------------------------------------+'
-    system 'bundle exec rspec'
+    system "bundle exec rspec"
 end
 
 run_rspec
@@ -31,8 +31,10 @@ FileMonitor.watch dir do
   # it equals files /\.rb$/
   files {
     disallow /.*/
-    allow /\.rb$/
-    allow /\.slim$/
+    allow /\.rb/
+    allow /\.js/
+    allow /\.css/
+    allow /\.slim/
   }
 
   # The commands will be runned when file changed
