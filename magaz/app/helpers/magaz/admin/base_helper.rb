@@ -2,6 +2,10 @@ module Magaz
   module Admin
     module BaseHelper
 
+      def cloudinary_base_url
+        Thumbnail.cloudinary_base_url
+      end
+
       def render_image_uploader(images, field_image_ids_name = 'image_ids')
         @images = images
         @field_image_ids_name = field_image_ids_name

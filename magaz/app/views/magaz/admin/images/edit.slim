@@ -3,13 +3,13 @@
   h3 Картинка
 .modal-body
   - image
-    .row.image-container data-id=id data-crop=crop_json
+    .row.image-container
       .span4
         .thumbnail
           img.origin src=data_url
       .span2
         p Иконка
-        div.thumbnail style='width: 100px; height: 100px; overflow: hidden;'
+        div.thumbnail
           img.preview src=data_url
 .modal-footer
   a.btn data-dismiss="modal" href="#" Закрыть

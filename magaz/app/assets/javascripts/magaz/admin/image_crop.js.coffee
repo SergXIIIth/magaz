@@ -5,10 +5,17 @@ Magaz.Admin = Magaz.Admin || {}
 Magaz.Admin.Crop = (container, init_crop) ->
   crop = {}
 
-  container = container
-  origin_img = $('.origin', container)
-  preview_img = $('.preview', container)
-  
+  origin_img    = $('.origin', container)
+  preview_img   = $('.preview', container)
+  preview_size = preview_img.width()
+
+  priview_init = ( ->
+    preview_img.closest('.thumbnail').css
+      width: preview_size
+      height: preview_size
+      overflow: 'hidden'
+  )()
+
   init_crop = (->
     coords = init_crop
 
@@ -29,8 +36,8 @@ Magaz.Admin.Crop = (container, init_crop) ->
 
     selection = plugin.getSelection(true)
 
-    scaleX = 100 / selection.width
-    scaleY = 100 / selection.height
+    scaleX = preview_size / selection.width
+    scaleY = preview_size / selection.height
 
     preview_img.css
       width: Math.round(scaleX * origin_img.width()),

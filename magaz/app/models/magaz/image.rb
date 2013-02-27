@@ -25,6 +25,10 @@ module Magaz
       crop.to_json
     end
 
+    def data_identifier
+      data.identifier
+    end
+
     private 
 
     def remove_could_data
