@@ -83,7 +83,7 @@ Magaz.Admin.image_upload = ->
   $('.show-upload')
     .popover
       html: true
-      title: "Перетащите или выберите картинки <a class='close popover-close'>&times;</a>"
+      title: "Перетащите или выберите картинки <a class='close popover-close' style='position: absolute; margin: -8px 0px 0px 8px'>&times;</a>"
       content: upload_popover_html
       placement: 'bottom'
       trigger: 'manual'
@@ -108,8 +108,9 @@ Magaz.Admin.image_upload = ->
       progress = parseInt(data.loaded / data.total * 100, 10)
       $('.progress .bar').css('width', progress + '%')
     done: (e, data) ->
+      $('.images-empty').remove()
       html = $(data.result).appendTo('.thumbnails')
-      init_img_events($('.thumbnail', html))
+      init_img_events(html)
       update_image_ids_field()
     start: ->
       $('.progress').show()

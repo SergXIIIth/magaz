@@ -25,4 +25,10 @@ javascript:
   .thumbnails.upload
     - images
       = render_image_thumbnail
+    - !images
+      .images-empty.muted
+        p.lead.text-center
+          |Нет картинок.
+          br
+          |Перетащите картинки сюда
 

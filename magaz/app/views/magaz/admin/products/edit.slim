@@ -6,11 +6,11 @@ html
   body.products-edit
     = render_main_menu
     .container
-      h1 Товар
       - product
         form action=save_product_path method="post"
           .row
             .span6
+              h1 Товар
               .well
                 = csrf_token
                 input.input-block-level type='hidden' name='image_ids'
@@ -22,14 +22,14 @@ html
                   .span3.w200
                     label Цена
                     input.input-block-level type='text' name='price' value=price
-    
+
                   .span3.w200
                     label Количество
                     input.input-block-level type='text' name='amount' value=amount
                 
                 label Описание
                 textarea.input-block-level name='desc' rows='7' =desc
-            .span6
+            .span6.images
               = render_image_uploader
           .form-actions
             input.btn.btn-primary type='submit' value='Сохранить'
