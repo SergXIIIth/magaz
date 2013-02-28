@@ -46,50 +46,82 @@ update_image_ids_field = ->
   field = $("[name='#{ImageUpload.field_image_ids_name}']")
   field.val(JSON.stringify(values))
 
-init_img_events = (thumbnails) ->
-  $('.remove', thumbnails).click ->
+init_img_events = (thumbnail) ->
+  $('.remove', thumbnail).click ->
     thumbnail = $(@).closest('.thumbnail')
     thumbnail.removeAttr('data-id')
     update_image_ids_field()
     thumbnail.fadeOut('slow', -> thumbnail.remove())
     false
 
-  $('.crop, .origin', thumbnails).click ->
+  $('.crop, .origin', thumbnail).click ->
     open_crop_modal($(@).closest('.thumbnail'))
     false
 
-  $(thumbnails).each ->
-    update_thumbnail_img($(@))
+  update_thumbnail_img(thumbnail)
+
+upload_popover_html = "<div class='alert.alert-info' style='margin-bottom: 5px'>
+    <p>
+      Вы можете просто перетаскивать картинки на сайт.
+      Даже без нажатия \"Добавить картинки\"
+    <hr />
+    <p>
+      Или выберите картинки.
+      Для выбеления нескольких файлов удерживайте Ctrl или Shift
+    </p>
+    <p class='text-center'>
+      <button class='btn btn-primary select-image'>Выбрать картинки</button>
+    </p>
+  </div>
+"
 
 window.Magaz = window.Magaz || {}
 Magaz = window.Magaz
 Magaz.Admin = Magaz.Admin || {}
 
 Magaz.Admin.image_upload = ->
-  $('.image-file').fileupload(
+  $('.show-upload')
+    .popover
+      html: true
+      title: "Перетащите или выберите картинки <a class='close popover-close'>&times;</a>"
+      content: upload_popover_html
+      placement: 'bottom'
+      trigger: 'manual'
+    .click ->
+      self = $(@)
+      self.popover('toggle')
+
+      $('.select-image').click ->
+        $('#image').click()
+        false
+
+      $('.popover-close').click ->
+        $(self).popover('toggle')
+        false
+
+      false
+
+  $('#image').fileupload(
     type: 'POST'
     dataType: 'html',
     progressall: (e, data) ->
       progress = parseInt(data.loaded / data.total * 100, 10)
       $('.progress .bar').css('width', progress + '%')
     done: (e, data) ->
-      img_html = data.result
-      img = $(img_html).appendTo('.thumbnails')
-      init_img_events(img)
+      html = $(data.result).appendTo('.thumbnails')
+      init_img_events($('.thumbnail', html))
       update_image_ids_field()
     start: ->
-      $('.progress').slideDown()
+      $('.progress').show()
+      $('.show-upload').popover('hide')
     stop: ->
-      $('.progress').slideUp()
+      $('.progress').hide()
   )
-
-  $('.show-upload').click ->
-    $('.upload-field').slideToggle()
-    false
 
   $('.thumbnails')
     .sortable(items: '.thumbnail')
     .bind('sortupdate', update_image_ids_field) 
 
-  init_img_events($('.upload .thumbnail'))
+  $('.upload .thumbnail').each -> init_img_events($(@))
   update_image_ids_field()
+

@@ -11,20 +11,27 @@ html
         form action=save_product_path method="post"
           .row
             .span6
-              = csrf_token
-              input type='hidden' name='image_ids'
-              label Название
-              input type='text' name='name' value=name
-              label Цена
-              input type='text' name='price' value=price
-              label Количество
-              input type='text' name='amount' value=amount
-              label Описание
-              textarea name='desc' =desc
+              .well
+                = csrf_token
+                input.input-block-level type='hidden' name='image_ids'
+                
+                label Название
+                input.input-block-level type='text' name='name' value=name
+
+                .row
+                  .span3.w200
+                    label Цена
+                    input.input-block-level type='text' name='price' value=price
+    
+                  .span3.w200
+                    label Количество
+                    input.input-block-level type='text' name='amount' value=amount
+                
+                label Описание
+                textarea.input-block-level name='desc' rows='7' =desc
             .span6
-              h2 Картинки
               = render_image_uploader
-          .row
-            .pull-right
-              input.btn.btn-primary type='submit' value='Сохранить'
-              a.btn href=admin_products_path Назад
+          .form-actions
+            input.btn.btn-primary type='submit' value='Сохранить'
+            |&nbsp
+            a.btn href=admin_products_path Назад

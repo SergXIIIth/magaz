@@ -15,12 +15,14 @@ describe Magaz::Admin::ImagesController do
     login
     visit new_admin_product_path
     find('.show-upload').click
+
+    page.execute_script("$('.image-field').show()") # input hidden for AJAX upload
     attach_file('image', image_path)
 
     page.should have_selector('img.origin')
 
     click_on 'Сохранить'
-    find('.product a').click
+    find('.product .thumbnail a').click
 
     page.should have_selector('img.origin')
   end
@@ -51,7 +53,7 @@ describe Magaz::Admin::ImagesController do
     visit product.edit_path
     find('.thumbnail .remove').click
     click_on 'Сохранить'
-    find('.product a').click
+    find('.product .thumbnail a').click
 
     page.should_not have_selector('img.origin')
   end
@@ -64,7 +66,7 @@ describe Magaz::Admin::ImagesController do
     visit product.edit_path
     find('.thumbnail .remove').click
     click_on 'Назад'
-    find('.product a').click
+    find('.product .thumbnail a').click
 
     page.should have_selector('img.origin')
   end
