@@ -3,12 +3,17 @@ html
   head
     title Manaz - open source e-commerce platform
     = render_head
+    coffee:
+      $ -> Magaz.Common.delete_ajax_btn()
   body.products-index
     = render_main_menu
     .container
-      h1 Товары
-      p
-        a.btn.btn-primary href=new_admin_product_path Добавить товар
+      h1.pull-left Товары
+      p.pull-left.new-product-btn
+        a.btn.btn-primary href=new_admin_product_path
+          i.icon-plus-sign.icon-white
+          |Добавить товар
+      .clearfix
       .row
         - products
           .product
@@ -19,12 +24,16 @@ html
                     a href=edit_path
                       img src=thumbnail_url
                 .span2
-                  p.lead
+                  p.lead.pull-left
                     a href=edit_path
                       - name
                         = name
                       - !name
                         |Без имени
+                  .pull-right.remove-btn
+                    a href=show_path data-delete='.product'
+                      i.icon-trash 
+                  .clearfix
                   - price
                     div
                       span.w50 Цена 

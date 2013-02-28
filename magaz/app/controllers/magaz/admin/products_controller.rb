@@ -32,6 +32,11 @@ module Magaz
         redirect_to admin_products_path
       end
 
+      def destroy
+        product = Product.find(params[:id])
+        product.delete
+        render json: {deleted: 1}
+      end
     end
   end
 end

@@ -6,6 +6,10 @@ module Magaz
       h.edit_admin_product_path(source.id)
     end
 
+    def show_path
+      h.admin_product_path(source.id)
+    end
+
     def render_image_uploader
       h.render_image_uploader(source.images.decorate)
     end
