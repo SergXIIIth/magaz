@@ -11,6 +11,7 @@ describe Magaz::Admin::UsersController do
 
     click_on 'Продолжить'
     page.should have_content 'Ваши данные'
+    sleep(1.5)
     find('.error-email').visible?.should == true
 
     fill_in('email', with: 'sergey@makridenkov.com')

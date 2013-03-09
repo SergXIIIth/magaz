@@ -22,10 +22,15 @@ gem 'omniauth-google-oauth2'
 
 group :test, :development do
   gem 'launchy'
+  gem 'poltergeist'
   gem 'capybara'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'file-monitor'
+  
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
 end
 
 group :assets do

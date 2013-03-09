@@ -11,13 +11,14 @@ describe Magaz::Admin::ImagesController do
     product.save!
   end
 
-  it 'upload' do
+  it 'upload', js: true do
     login
     visit new_admin_product_path
     find('.show-upload').click
 
     page.execute_script("$('.image-field').show()") # input hidden for AJAX upload
     attach_file('image', image_path)
+    sleep(10)
 
     page.should have_selector('img.origin')
 
@@ -27,7 +28,7 @@ describe Magaz::Admin::ImagesController do
     page.should have_selector('img.origin')
   end
 
-  it 'croping' do
+  it 'croping', js: true do
     product = FactoryGirl.create(:product).decorate
     upload_new_image(product)
 

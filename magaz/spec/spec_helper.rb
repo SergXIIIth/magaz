@@ -4,10 +4,12 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
 require 'capybara/rspec'
+require 'capybara/poltergeist'
 
 # Capybara.javascript_driver = :selenium
 # Capybara.default_driver = :rack_test
-Capybara.default_driver = :selenium
+# Capybara.default_driver = :selenium
+Capybara.javascript_driver = :poltergeist
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -16,6 +18,10 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 def login
     visit login_path
     find('.vkontakte').click 
+end
+
+def op
+  save_and_open_page
 end
 
 RSpec.configure do |config|
