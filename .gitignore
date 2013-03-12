@@ -8,9 +8,9 @@
 magaz/.bundle
 
 # Ignore the default SQLite database.
-/magaz/db/*.sqlite3
+magaz/db/*.sqlite3
 
 # Ignore all logfiles and tempfiles.
-/magaz/log/*.log
-/magaz/tmp
-/magaz/config/application.yml
+magaz/log/*.log
+magaz/tmp
+magaz/config/application.yml
