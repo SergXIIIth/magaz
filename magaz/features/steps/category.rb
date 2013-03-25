@@ -3,16 +3,18 @@ class Spinach::Features::Category < Spinach::FeatureSteps
     login
   end
 
-  step 'on products page' do
+  step 'I am on the products page' do
     visit admin_products_path
   end
 
-  step 'click add category' do
-    pending 'step not implemented'
+  step 'I click add category' do
+    find('.new-category-btn').click
   end
 
-  step 'type category name and click save' do
-    pending 'step not implemented'
+  step 'I fill the category name and click save' do
+    @category = build(:category)
+    fill_in 'name', with: @category.name
+    find('.save-btn').click
   end
 
   step 'new category appear and selected' do

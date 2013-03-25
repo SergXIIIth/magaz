@@ -3,43 +3,67 @@ html
   head
     title Manaz - open source e-commerce platform
     = render_head
-    coffee:
-      $ -> Magaz.Common.delete_ajax_btn()
   body.products-index
     = render_main_menu
     .container
-      h1.pull-left Товары
-      p.pull-left.new-product-btn
-        a.btn.btn-primary href=new_admin_product_path
-          i.icon-plus-sign.icon-white
-          |Добавить товар
-      .clearfix
-      hr.head-line
       .row
-        - products
-          .product
-            .span4
-              .row
-                .span2
-                  .thumbnail
-                    a href=edit_path
-                      img src=thumbnail_url
-                .span2
-                  p.lead.pull-left
-                    a href=edit_path
-                      - name
-                        = name
-                      - !name
-                        |Без имени
-                  .pull-right.remove-btn
-                    a href=show_path data-delete='.product'
-                      i.icon-trash 
-                  .clearfix
-                  - price
-                    div
-                      span.w50 Цена 
-                      = price
-                  - amount
-                    div
-                      span.w50 Кол-во
-                      = amount
+        .span4
+          .well.well-small
+            h3.pull-left Категории
+            p.pull-left.new-category-btn
+              a.btn.btn-mini href='#'
+                i.icon-plus-sign
+                |Добавить
+
+            .clearfix
+
+            #category-editor.modal.hide.fade
+              .modal-header
+                .close data-dismiss="modal" &times;
+                h3 Категория
+              .modal-body
+                form
+                  lable Имя категории
+                  input.name.input-block-level type='text' placeholder='Впишите имя категории здесь' name='name'
+              .modal-footer 
+                a.btn data-dismiss="modal" href="#" Закрыть
+                a.btn.save-btn.btn-primary href="#" Сохранить
+
+            #categories
+              
+        .span8
+          h1.pull-left Товары
+          p.pull-left.new-product-btn
+            a.btn.btn-primary href=new_admin_product_path
+              i.icon-plus-sign.icon-white
+              |Добавить товар
+          .clearfix
+          hr.head-line
+          .row
+            - products
+              .product
+                .span4
+                  .row
+                    .span2
+                      .thumbnail
+                        a href=edit_path
+                          img src=thumbnail_url
+                    .span2
+                      p.lead.pull-left
+                        a href=edit_path
+                          - name
+                            = name
+                          - !name
+                            |Без имени
+                      .pull-right.remove-btn
+                        a href=show_path data-delete='.product'
+                          i.icon-trash 
+                      .clearfix
+                      - price
+                        div
+                          span.w50 Цена 
+                          = price
+                      - amount
+                        div
+                          span.w50 Кол-во
+                          = amount

@@ -27,7 +27,23 @@ module Magaz
       end
 
       def javascript
-        javascript_include_tag "magaz/admin/admin"
+        admin_js = javascript_include_tag "magaz/admin/admin"
+      end
+
+      def auto_run_by_contoller_action_js
+        function_name = "#{params[:controller].gsub('/', '_')}".capitalize
+
+        auto_run_js = "
+          <script>
+            $(function(){
+              if (window.#{function_name} && window.#{function_name}.#{params[:action]}) {
+                window.#{function_name}.#{params[:action]}();
+              }
+            });
+          </script>
+          "
+
+        auto_run_js.html_safe
       end
 
       def render_head

@@ -6,8 +6,8 @@ Feature: Category
 
   Scenario: Create category
     Given I am user
-    And on products page
-    When click add category
-    And type category name and click save
+    And I am on the products page
+    When I click add category
+    And I fill the category name and click save
     Then new category appear and selected
     And no products in new categoty

@@ -9,13 +9,17 @@ FactoryGirl.define do
   end
 
   factory :product, class: Magaz::Product do
-    name 'Хлеб'
+    sequence(:name) { |n| "Ноутбук #{n}"}
   end
 
   factory :product_full, class: Magaz::Product do
-    name    'Хлеб'
+    sequence(:name) { |n| "Ноутбук #{n}"}
     price   Random.rand
     amount  Random.rand
     desc    Random.rand
+  end
+
+  factory :category, class: Magaz::Category do
+    sequence(:name) { |n| "Электроника #{n}"}
   end
 end
