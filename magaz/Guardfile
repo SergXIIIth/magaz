@@ -1,0 +1,11 @@
+guard 'spinach', bundler: false do
+  watch(%r|^features/(.*)\.feature|)
+  watch(%r|^features/steps/(.*)([^/]+)\.rb|) do |m|
+    "features/#{m[1]}#{m[2]}.feature"
+  end
+end
+
+guard 'rspec', cli: '--color', all_on_start: false, all_after_pass: false do
+  watch(%r{^spec/.+_spec\.rb$})
+end
+

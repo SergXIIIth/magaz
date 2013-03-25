@@ -35,6 +35,9 @@ group :test, :development do
   gem 'meta_request'
 
   gem 'spinach-rails'
+  gem 'guard-spinach', github: 'codegram/guard-spinach'
+  gem 'guard-rspec'
+  
 end
 
 group :assets do
