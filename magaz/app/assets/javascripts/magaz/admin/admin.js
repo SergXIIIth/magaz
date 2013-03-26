@@ -1,7 +1,8 @@
+//= require serenade
 //= require bootstrap
 //= require jquery.fileupload
 //= require jquery.imgareaselect
 //= require jquery.sortable
-//= require handlebars
-//= require ember
+//= require jquery.sortable
 //= require_tree .
+//= require_tree ../../views/

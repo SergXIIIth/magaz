@@ -40,10 +40,13 @@ group :test, :development do
   
 end
 
+
 group :assets do
   gem 'bootstrap-sass'
   gem 'sass-rails'
   gem 'coffee-rails'
+
+  gem 'serenade', :require => 'serenade/rails'
 
   gem 'execjs'
   gem 'therubyracer'

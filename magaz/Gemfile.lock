@@ -255,6 +255,9 @@ GEM
       multi_json (~> 1.0)
       rubyzip
       websocket (~> 1.0.4)
+    serenade (0.4.1)
+      execjs (>= 0.3.0)
+      multi_json
     slim (1.3.6)
       temple (~> 0.5.5)
       tilt (~> 1.3.3)
@@ -327,6 +330,7 @@ DEPENDENCIES
   rails
   rspec-rails
   sass-rails
+  serenade
   slim
   spinach-rails
   therubyracer
