@@ -8,7 +8,8 @@ Products.index = ->
 
 CategoryContol = ->
 
-  model =  new Serenade.Collection( [{ name: "c1" }, { name: "c2" }] )
+  model =  {}
+  model.categories = new Serenade.Collection( [{ name: "c1" }, { name: "c2" }] )
   window.model = model
 
   $('#categories').prepend(Serenade.render('categories/list', model))
