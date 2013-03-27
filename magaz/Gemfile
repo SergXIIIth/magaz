@@ -24,8 +24,10 @@ gem 'omniauth-google-oauth2'
 
 group :test, :development do
   gem 'launchy'
+
   gem 'poltergeist'
   gem 'capybara'
+
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'file-monitor'

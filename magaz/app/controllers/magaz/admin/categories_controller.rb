@@ -2,6 +2,10 @@
 module Magaz
 	module Admin
 		class CategoriesController < Magaz::Admin::BaseController
+			def index
+				render json: Category.all.to_a
+			end
+
 			def create
 				categoty = if params[:id]
 					Category.find params[:id]

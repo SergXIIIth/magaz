@@ -1,2 +1,4 @@
 - collection @categories
-  .category @name
+  .category
+    @name
+    i.icon-edit[event:click=edit]

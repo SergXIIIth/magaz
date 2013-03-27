@@ -4,10 +4,10 @@ Feature: Category
   Choice category for product 
   Show product in category
 
+  @firefox
   Scenario: Create category
     Given I am user
     And I am on the products page
     When I click add category
     And I fill the category name and click save
-    Then new category appear and selected
-    And no products in new categoty
+    Then new category should appear

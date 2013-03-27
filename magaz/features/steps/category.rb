@@ -17,11 +17,7 @@ class Spinach::Features::Category < Spinach::FeatureSteps
     find('.save-btn').click
   end
 
-  step 'new category appear and selected' do
-    pending 'step not implemented'
-  end
-
-  step 'no products in new categoty' do
-    pending 'step not implemented'
+  step 'new category should appear' do
+    page.should have_content @category.name
   end
 end

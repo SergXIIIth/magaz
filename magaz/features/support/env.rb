@@ -1,7 +1,7 @@
 ENV['RAILS_ENV'] = 'test'
 require './config/environment'
 
-require 'rspec-rails'
+require 'rspec'
 require 'spinach/capybara'
 require 'capybara/poltergeist'
 
@@ -11,6 +11,17 @@ include FactoryGirl::Syntax::Methods
 Spinach.hooks.before_scenario do
   Mongoid.purge!
 end
+
+Spinach.hooks.on_tag("js") do
+  ::Capybara.current_driver = :poltergeist
+  ::Capybara.default_wait_time = 5
+end
+
+Spinach.hooks.on_tag("firefox") do
+  ::Capybara.current_driver = :selenium
+  ::Capybara.default_wait_time = 5
+end
+
 
 def login(user = nil)
   user = create(:user)
@@ -31,4 +42,8 @@ def login(user = nil)
   @current_user = user
   visit login_path
   find('.vkontakte').click 
+end
+
+def debug
+  sleep 13
 end
