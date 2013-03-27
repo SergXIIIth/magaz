@@ -9,6 +9,7 @@ Magaz::Application.routes.draw do
     resources :orders
     resources :users
     resources :images
+    resources :categories
   end
 
   match '/auth/:provider/callback', to: 'magaz/admin/sessions#create'

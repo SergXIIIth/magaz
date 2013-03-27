@@ -9,4 +9,4 @@
         input.name.input-block-level[type="text" placeholder="Впишите имя категории здесь" name="name" value=@name]
     .modal-footer
       a.btn[data-dismiss="modal" href="#"] "Закрыть"
-      a.btn.save-btn.btn-primary[href="#"] "Сохранить"
+      a.btn.save-btn.btn-primary[href="#" event:click=save] "Сохранить"

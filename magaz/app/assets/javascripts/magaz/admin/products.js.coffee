@@ -9,13 +9,16 @@ Products.index = ->
 CategoryContol = ->
   # --- Model
   class Category extends Serenade.Model
-    @property "name"
+    @property "id", serialize: true
+    @property "name", serialize: true
+    save: -> $.post '/admin/categories', @.toJSON(), (id) => @id = id
+
 
   class Model extends Serenade.Model
     @property "categories", "editor"
-    
+
     constructor: ->
-      @categories = new Serenade.Collection( [{ name: "c1" }, { name: "c2" }] )
+      @categories = new Serenade.Collection()
       @editor = new Category(name: 'new') # will be instance of editing category
     
 
@@ -24,6 +27,12 @@ CategoryContol = ->
 
   # --- Contorller
   class EditCtrl
+    save: ->
+      model.editor.name = $('.category-editor .name', cnt).val()
+      model.editor.save()
+      model.categories.push(model.editor)
+      $('.category-editor', cnt).modal('hide')
+
 
   # --- init
   cnt = $('#categories')
