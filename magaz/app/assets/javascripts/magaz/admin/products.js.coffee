@@ -7,12 +7,36 @@ Products.index = ->
   CategoryContol()
 
 CategoryContol = ->
+  # --- Model
+  class Category extends Serenade.Model
+    @property "name"
 
-  model =  {}
-  model.categories = new Serenade.Collection( [{ name: "c1" }, { name: "c2" }] )
+  class Model extends Serenade.Model
+    @property "categories", "editor"
+    
+    constructor: ->
+      @categories = new Serenade.Collection( [{ name: "c1" }, { name: "c2" }] )
+      @editor = new Category(name: 'new') # will be instance of editing category
+    
+
+  model = new Model()
   window.model = model
 
-  $('#categories').prepend(Serenade.render('categories/list', model))
+  # --- Contorller
+  class EditCtrl
+
+  # --- init
+  cnt = $('#categories')
+
+  $('.list', cnt).prepend(Serenade.render('categories/list', model))
+  $('.list', cnt).prepend(Serenade.render('categories/edit', model, EditCtrl))
+
+
+  # event outside contollers
+  $('.new-category-btn', cnt).click ->
+    model.editor = new Category()
+    $('.category-editor', cnt).modal('show')
+    return false
 
 
   # model

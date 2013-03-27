@@ -7,7 +7,7 @@ html
     = render_main_menu
     .container
       .row
-        .span4
+        #categories.span4
           .well.well-small
 
             h3.pull-left Категории
@@ -18,19 +18,7 @@ html
 
             .clearfix
 
-            #category-editor.modal.hide.fade
-              .modal-header
-                .close data-dismiss="modal" &times;
-                h3 Категория
-              .modal-body
-                form
-                  lable Имя категории
-                  input.name.input-block-level type='text' placeholder='Впишите имя категории здесь' name='name'
-              .modal-footer 
-                a.btn data-dismiss="modal" href="#" Закрыть
-                a.btn.save-btn.btn-primary href="#" Сохранить
-
-            #categories
+            .list
 
 
 

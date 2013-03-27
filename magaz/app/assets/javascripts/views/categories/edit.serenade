@@ -1,0 +1,12 @@
+- in @editor
+  .category-editor.modal.fade
+    .modal-header
+      .close[data-dismiss="modal"] "x"
+      h3 "Категория"
+    .modal-body
+      form
+        lable "Имя категории"
+        input.name.input-block-level[type="text" placeholder="Впишите имя категории здесь" name="name" value=@name]
+    .modal-footer
+      a.btn[data-dismiss="modal" href="#"] "Закрыть"
+      a.btn.save-btn.btn-primary[href="#"] "Сохранить"
