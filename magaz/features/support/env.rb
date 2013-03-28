@@ -17,7 +17,7 @@ Spinach.hooks.on_tag("js") do
   ::Capybara.default_wait_time = 5
 end
 
-Spinach.hooks.on_tag("firefox") do
+Spinach.hooks.on_tag("browser") do
   ::Capybara.current_driver = :selenium
   ::Capybara.default_wait_time = 5
 end

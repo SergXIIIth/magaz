@@ -2,8 +2,8 @@ module Magaz
   class ImageSaver
     def initialize(json)
       @json = json
-      @json = ActiveSupport::JSON.decode(json) if json.is_a? String
-      @json ||= {}
+      @json = ActiveSupport::JSON.decode(json) if json.present? && json.is_a?(String)
+      @json = {} if json.blank?
     end
 
     def image_ids

@@ -4,7 +4,7 @@ Feature: Category
   Choice category for product 
   Show product in category
 
-  @firefox
+  @browser
   Scenario: Create category
     Given I am user on the products page
     When I click on add category
@@ -12,7 +12,7 @@ Feature: Category
     And I click on save
     Then new category should appear
 
-  @firefox
+  @browser
   Scenario: Edit category
     Given I am user on the products page
     And category exist
@@ -21,7 +21,7 @@ Feature: Category
     And I click on save
     Then category should name should be changed
 
-  @firefox
+  @browser
   Scenario: Delete category
     Given I am user on the products page
     And category exist
