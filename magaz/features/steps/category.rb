@@ -79,4 +79,19 @@ class Spinach::Features::Category < Spinach::FeatureSteps
   step 'I visit the product page' do
     visit edit_admin_product_path @product
   end
+
+  step 'product with category exist' do
+    @product = create(:product)
+    @exist_category = create(:category)
+    @product.category_ids << @exist_category.id
+    @product.save!
+  end
+
+  step 'I click delete category' do
+    find('.chosen-categories .delete-btn').click
+  end
+
+  step 'I should not see chosen category' do
+    page.should_not have_content @exist_category.name
+  end
 end

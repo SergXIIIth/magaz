@@ -28,7 +28,7 @@ Products.edit = ->
         from: 'categories', 
         filter: 'selected',
         changed: -> 
-          categoty_ids = @chosen.map (categoty) -> categoty.id
+          categoty_ids = (category.id for category in @chosen)
           $('.chosen-category-ids').val(JSON.stringify(categoty_ids))
       }
 
@@ -50,10 +50,10 @@ Products.edit = ->
           categoty = Category.find(categoty_id)
           categoty.selected = true
 
-    select: (elem, categoty) -> 
-      categoty.selected = !categoty.selected
+    select: (elem, categoty) -> categoty.selected = !categoty.selected
 
   class ChosenCtrl
+    delete: (elem, category, event) -> category.selected = false
 
 
   # --- UI

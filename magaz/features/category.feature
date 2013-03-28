@@ -44,3 +44,14 @@ Feature: Category
     When I click on save
     And I visit the product page
     Then I should see chosen category
+
+  @browser
+  Scenario: Remove the product from the category
+    Given I am user
+    And product with category exist
+    And I visit the product page
+    When I click delete category
+    Then I should not see chosen category
+    When I click on save
+    And I visit the product page
+    Then I should not see chosen category

@@ -19,7 +19,7 @@ module Magaz
     end
 
     def category_ids_json
-      source.category_ids.to_json
+     source.category_ids.to_json
     end
   end
 end
