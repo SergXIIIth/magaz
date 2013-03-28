@@ -18,6 +18,12 @@ module Magaz
 
 				render inline: categoty.id.to_s
 			end
+
+			def destroy
+				category = Category.find params[:id]
+				category.delete
+				render inline: 'deleted'
+			end
 		end
 	end
 end

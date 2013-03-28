@@ -45,3 +45,31 @@ Common.delete_ajax_btn = (cnt) ->
       false
 
     false
+
+Common.delete_confirm_dialog = (on_delete) ->
+  cnt = document if cnt == undefined
+
+  modal_html = "<div class='modal fade'>
+    <div class='modal-header'>
+      <button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>
+      <h3>Внимание удаление!</h3>
+    </div>
+    <div class='modal-body'>
+      <p>Вы уверены, что хотите продолжить удаление?</p>
+    </div>
+    <div class='modal-footer'>
+      <a href='#' class='btn' data-dismiss='modal'>Отменить</a>
+      <a href='#' class='btn btn-primary delete-confirm-btn'>Удалить</a>
+    </div>
+  </div>"
+
+  modal = $(modal_html).appendTo('body')
+  modal.on('hidden', -> modal.remove())
+  modal.modal('show')
+
+  $('.delete-confirm-btn', modal).click ->
+    modal.modal('hide')
+    on_delete()
+    false
+
+  false

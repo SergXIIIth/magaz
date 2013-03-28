@@ -1,4 +1,9 @@
-- collection @categories
-  .category
-    @name
-    i.icon-edit[event:click=edit]
+ul.nav.nav-pills.nav-stacked
+  - collection @categories
+    li.category[event:click=select class:active=@selected]
+      a[href="#"]
+        @name
+        .buttons.pull-right
+          i.icon-edit.icon-white.edit-category-btn[event:click=edit]
+          i.icon-trash.icon-white.detele-category-btn[event:click=delete]
+        .clearfix

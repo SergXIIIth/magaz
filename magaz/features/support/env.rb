@@ -45,5 +45,5 @@ def login(user = nil)
 end
 
 def debug
-  sleep 13
+  sleep 25
 end
