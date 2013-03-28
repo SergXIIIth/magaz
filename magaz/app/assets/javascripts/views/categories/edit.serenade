@@ -1,5 +1,5 @@
 - in @editor
-  .category-editor.modal.fade
+  .category-editor.modal.fade.hide
     .modal-header
       .close[data-dismiss="modal"] "x"
       h3 "Категория"

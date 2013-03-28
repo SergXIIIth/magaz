@@ -3,68 +3,72 @@ Products = @Magaz_admin_products
 
 Products.index = ->
   Magaz.Common.delete_ajax_btn()
-
   CategoryContol()
 
-CategoryContol = ->
+Products['new'] = ->
+  Products.edit()
+
+Products.edit = ->
+  CategoryChoiceContol()
+
+# API
+# .choice-category-btn, .chosen-categories, .chosen-categories-ids
+@CategoryChoiceContol = ->
   # --- Model
+
   class Category extends Serenade.Model
     @property 'id', serialize: true
-    @property 'name', serialize: true
+    @property 'name'
     @property 'selected'
-    save: -> $.post '/admin/categories', @.toJSON(), (id) => @id = id
-
 
   class Model extends Serenade.Model
-    @property 'categories', 'editor'
+    @collection 'categories'
+    @selection 'chosen', 
+      {
+        from: 'categories', 
+        filter: 'selected',
+        changed: -> 
+          categoty_ids = @chosen.map (categoty) -> categoty.id
+          $('.chosen-category-ids').val(JSON.stringify(categoty_ids))
+      }
 
     constructor: ->
       @categories = new Serenade.Collection()
-      @editor = new Category(name: 'new') # will be instance of editing category
-    
+      @chosen = new Serenade.Collection()
 
   model = new Model()
-  window.model = model
 
   # --- Contorller
-  class EditorCtrl
-    save: ->
-      $('.category-editor', cnt).modal('hide')
-      model.editor.name = $('.category-editor .name', cnt).val()
-      model.categories.push(model.editor) unless model.editor.id
-      model.editor.save()
+  class ChoiceCtrl
+    constructor: ->
+      $.get '/admin/categories', (categories_json) -> 
+        for category_json in categories_json
+          model.categories.push(new Category(category_json))
 
-  class CategoriesCtrl
-    edit: (elem, category) ->
-      ui.editor.show(category)
-    select: (elem, category) ->
-      for cat in model.categories
-        cat.selected = false
-      category.selected = true
-    delete: (elem, category) ->
-      ui.delete_confirm ->
-        $.deleteajax('/admin/categories/' + category.id)
-        model.categories.delete(category)
+        chosen_category_ids = JSON.parse($('.chosen-category-ids').data('init'))
+        for categoty_id in chosen_category_ids
+          categoty = Category.find(categoty_id)
+          categoty.selected = true
+
+    select: (elem, categoty) -> 
+      categoty.selected = !categoty.selected
+
+  class ChosenCtrl
 
 
-  # -- UI
+  # --- UI
+
+  cnt = $('.chosen-categories')
+
+
   ui = 
-    editor:
-      show: (category) ->
-        model.editor = category
-        $('.category-editor', cnt).modal('show')
-    delete_confirm: Magaz.Common.delete_confirm_dialog
+    choice_dialog:
+      show: ->
+        $('.category-choice-dialog', cnt).modal('show')
 
-  # --- init
-  $.get '/admin/categories', (categories_json) -> 
-    for category_json in categories_json
-      model.categories.push(new Category(category_json))
+  $('.choice-category-btn').click ->
+    ui.choice_dialog.show()
+    false
 
-  cnt = $('#categories')
-
-  $('.list', cnt).prepend(Serenade.render('categories/list', model, CategoriesCtrl))
-  $('.list', cnt).prepend(Serenade.render('categories/edit', model, EditorCtrl))
-
-  $('.new-category-btn', cnt).click ->
-    ui.editor.show(new Category())
-    return false
+  $(cnt).prepend(Serenade.render('categories/choice_dialog', model, ChoiceCtrl))
+  $(cnt).prepend(Serenade.render('categories/chosen', model, ChosenCtrl))

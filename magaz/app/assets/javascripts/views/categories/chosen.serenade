@@ -1,0 +1,6 @@
+- collection @chosen
+  .categoty
+    span.truncate @name
+    a.delete-btn[href="#"]
+      i.icon-trash
+.clearfix

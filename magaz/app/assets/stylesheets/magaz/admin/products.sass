@@ -17,6 +17,12 @@
   border: 1px solid #ddd
   border-radius: 4px
 
+.truncate 
+  display: inline-block
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
 .products-index
   .product
     margin-bottom: 10px
@@ -39,6 +45,9 @@
     margin: 10px 0 20px
 
   .category
+    .truncate
+      width: 195px
+
     .buttons
       i 
         padding: 0px 5px
@@ -64,5 +73,39 @@
   .images-empty
     margin-top: 150px
 
-  .well
-    height: 315px
+  .inputs
+    min-height: 315px
+    max-height: 430px
+
+  #choice-category
+    label
+      display: inline
+
+    .choice-category-btn
+      margin-left: 10px
+      margin-bottom: 5px
+
+    i
+      padding: 0px 5px
+
+    .chosen-categories
+      max-height: 75px
+      overflow-y: auto
+
+    .categoty
+      border: 1px solid #e5e5e5
+      float: left
+      padding: 5px
+      margin: 0px 5px 5px 0px
+      background-color: white
+
+    .truncate
+      width: 100px
+
+      i
+        padding: 0px
+
+      .delete-btn
+        padding: 5px
+
+

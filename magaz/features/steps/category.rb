@@ -36,6 +36,7 @@ class Spinach::Features::Category < Spinach::FeatureSteps
 
   step 'I click on delete category button' do
     find('.detele-category-btn').click
+    sleep 0.5
   end
 
   step 'I should not see category' do
@@ -47,7 +48,35 @@ class Spinach::Features::Category < Spinach::FeatureSteps
   end
 
   step 'I confirm delete' do
-    sleep 0.5
     find('.delete-confirm-btn').click
+  end
+
+  step 'I am user' do
+    login
+  end
+
+  step 'I click on select category button' do
+    find('.choice-category-btn').click
+    sleep 0.5
+  end
+
+  step 'I select category' do
+    find('.category-choice-dialog .category').click
+  end
+
+  step 'I close dialog' do
+    find('.close').click
+  end
+
+  step 'I should see chosen category' do
+    page.should have_content @exist_category.name
+  end
+
+  step 'product exist' do
+    @product = create(:product)
+  end
+
+  step 'I visit the product page' do
+    visit edit_admin_product_path @product
   end
 end

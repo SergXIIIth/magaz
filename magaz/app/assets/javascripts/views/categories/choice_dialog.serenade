@@ -1,0 +1,15 @@
+.category-choice-dialog.modal.fade
+  .modal-header
+    .close[data-dismiss="modal"] "x"
+    h3 "Выберите категии, нажимия них их"
+  .modal-body
+    ul.categories.nav.nav-pills.nav-stacked
+      - collection @categories
+        li.category[event:click=select class:active=@selected]
+          a[href="#"]
+            .pull-left
+              i.icon-check.icon-white
+            @name
+            .clearfix
+  .modal-footer
+    a.btn[data-dismiss="modal" href="#"] "Закрыть"

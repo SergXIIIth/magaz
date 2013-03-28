@@ -11,7 +11,7 @@ html
           .row
             .span6
               h1 Товар
-              .well
+              .well.inputs
                 = csrf_token
                 input.input-block-level type='hidden' name='image_ids'
                 
@@ -29,9 +29,16 @@ html
                 
                 label Описание
                 textarea.input-block-level name='desc' rows='7' =desc
+
+                #choice-category
+                  input.chosen-category-ids type='hidden' name='category_ids' data-init=category_ids_json
+                  label Категории
+                  a.btn.btn-mini.choice-category-btn href='#' Выбрать&hellip;
+                  .chosen-categories.well.well-small
+
             .span6.images
               = render_image_uploader
           .form-actions
-            input.btn.btn-primary type='submit' value='Сохранить'
+            input.btn.btn-primary.save-btn type='submit' value='Сохранить'
             |&nbsp
             a.btn href=admin_products_path Назад

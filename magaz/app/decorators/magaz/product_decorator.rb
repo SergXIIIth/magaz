@@ -17,5 +17,9 @@ module Magaz
     def thumbnail_url
       Thumbnail.url(source.images, 140)
     end
+
+    def category_ids_json
+      source.category_ids.to_json
+    end
   end
 end
