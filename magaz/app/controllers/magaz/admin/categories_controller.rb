@@ -3,7 +3,7 @@ module Magaz
 	module Admin
 		class CategoriesController < Magaz::Admin::BaseController
 			def index
-				render json: Category.top_level.to_a
+				render json: Category.all.to_a
 			end
 
 			def create

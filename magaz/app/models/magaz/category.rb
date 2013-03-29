@@ -11,18 +11,11 @@ module Magaz
     scope :top_level, where(parent_category_id: nil)
 
     def as_json(opt)
-      category_json = {
+      {
         id: id,
-        name: name
+        name: name,
+        parent_category_id: parent_category_id,
       }
-
-
-      if subcategories.present?
-        category_json[:subcategories] = 
-          subcategories.map{ |category| category.as_json(opt) }
-      end
-
-      category_json
     end
   end
 end

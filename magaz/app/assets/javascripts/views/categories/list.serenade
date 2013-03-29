@@ -1,29 +1,3 @@
 ul.nav.nav-pills.nav-stacked
-  - collection @categories
-    li.category[class:active=@selected]
-      a[href="#" event:dblclick=edit! event:click=select]
-        .truncate @name
-        .buttons.btn-group.pull-right
-          a.open-actions-btn.dropdown-toggle[data-toggle="dropdown" href="#"]
-            i.icon-wrench.icon-white
-          ul.dropdown-menu
-            li
-              a.edit-category-btn[href="#" event:click=edit!]
-                i.icon-edit
-                "Изменить категорию"
-            li
-              a.detele-category-btn[event:click=delete! href="#"]
-                i.icon-trash
-                "Удалить категорию"
-            li.divider
-            li
-              a.add-subcategory-btn[event:click=add_subcategoty! href="#"]
-                i.icon-plus
-                "Добавить подкатегорию"
-        .clearfix
-      - if @subcategories_exist
-        ul.subcategories.nav.nav-pills.nav-stacked
-          - collection @subcategories
-            li.category[event:click=select class:active=@selected]
-              a[href="#" event:dblclick=edit!]
-                .truncate @name
+  - collection @top_level_categories
+    - view "categories/list_category"

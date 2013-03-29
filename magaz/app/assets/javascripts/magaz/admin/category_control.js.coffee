@@ -5,22 +5,14 @@
 @CategoryContol = ->
   # --- Model
   class Category extends Serenade.Model
-    constructor: (category_json) ->
-      if category_json.subcategories && category_json.subcategories.length > 0
-
-        subcategories = new Serenade.Collection()
-        for subcategory_json in category_json.subcategories
-          subcategories.push(new Category(subcategory_json))
-
-        category_json.subcategories = subcategories
-
-      super
-
     @property 'id', serialize: true
     @property 'name', serialize: true
     @property 'selected'
     @property 'parent_category_id', serialize: true
-    @collection 'subcategories'
+    @property 'subcategories',
+      get: ->
+        model.categories.filter (category) =>
+          category.parent_category_id == @id
     @property 'subcategories_exist',
       get: -> @subcategories.length > 0
 
@@ -28,11 +20,11 @@
 
 
   class Model extends Serenade.Model
-    @property 'categories', 'editor'
-
-    constructor: ->
-      @categories = new Serenade.Collection()
-      @editor = new Category(name: 'new') # will be instance of editing category
+    @property 'editor'
+    @collection 'categories'
+    @property 'top_level_categories',
+      get: -> @categories.filter (category) -> category.parent_category_id == null
+      dependOn: 'categories'
     
 
   model = new Model()
