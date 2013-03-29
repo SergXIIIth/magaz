@@ -1,7 +1,7 @@
 li.category[class:active=@selected]
   a[href="#" event:dblclick=edit! event:click=select]
-    .truncate @name
-    .buttons.btn-group.pull-right
+    .name @name
+    .buttons.btn-group
       a.open-actions-btn.dropdown-toggle[data-toggle="dropdown" href="#"]
         i.icon-wrench.icon-white
       ul.dropdown-menu

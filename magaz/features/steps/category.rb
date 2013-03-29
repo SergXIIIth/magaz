@@ -43,7 +43,7 @@ class Spinach::Features::Category < Spinach::FeatureSteps
   end
 
   step 'new subcategory should appear' do
-    page.should have_content @subcategory_hash.name
+    find('.subcategories').should have_content @subcategory_hash.name
   end
 
   step 'I should see subcategory after reload page' do

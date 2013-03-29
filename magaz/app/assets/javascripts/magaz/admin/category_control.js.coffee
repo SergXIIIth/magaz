@@ -5,6 +5,10 @@
 @CategoryContol = ->
   # --- Model
   class Category extends Serenade.Model
+    constructor: ->
+      @parent_category_id = null
+      super
+
     @property 'id', serialize: true
     @property 'name', serialize: true
     @property 'selected'
