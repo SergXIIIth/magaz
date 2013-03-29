@@ -1,9 +1,29 @@
 ul.nav.nav-pills.nav-stacked
   - collection @categories
-    li.category[event:click=select class:active=@selected]
-      a[href="#" event:dblclick=edit!]
+    li.category[class:active=@selected]
+      a[href="#" event:dblclick=edit! event:click=select]
         .truncate @name
-        .buttons.pull-right
-          i.icon-edit.icon-white.edit-category-btn[event:click=edit!]
-          i.icon-trash.icon-white.detele-category-btn[event:click=delete!]
+        .buttons.btn-group.pull-right
+          a.open-actions-btn.dropdown-toggle[data-toggle="dropdown" href="#"]
+            i.icon-wrench.icon-white
+          ul.dropdown-menu
+            li
+              a.edit-category-btn[href="#" event:click=edit!]
+                i.icon-edit
+                "Изменить категорию"
+            li
+              a.detele-category-btn[event:click=delete! href="#"]
+                i.icon-trash
+                "Удалить категорию"
+            li.divider
+            li
+              a.add-subcategory-btn[event:click=add_subcategoty! href="#"]
+                i.icon-plus
+                "Добавить подкатегорию"
         .clearfix
+      - if @subcategories_exist
+        ul.subcategories.nav.nav-pills.nav-stacked
+          - collection @subcategories
+            li.category[event:click=select class:active=@selected]
+              a[href="#" event:dblclick=edit!]
+                .truncate @name

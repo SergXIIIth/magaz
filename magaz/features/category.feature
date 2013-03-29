@@ -14,6 +14,17 @@ Feature: Category
     Then new category should appear
 
   @browser
+  Scenario: Create subcategory
+    Given I am user
+    And category exist
+    And I visit the products page
+    When I click on add subcategory
+    And I fill the subcategory name 
+    And I click on save
+    Then new subcategory should appear
+    And I should see subcategory after reload page
+
+  @browser
   Scenario: Edit
     Given I am user
     And category exist

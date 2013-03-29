@@ -3,7 +3,7 @@ module Magaz
 	module Admin
 		class CategoriesController < Magaz::Admin::BaseController
 			def index
-				render json: Category.all.to_a
+				render json: Category.top_level.to_a
 			end
 
 			def create
@@ -14,6 +14,7 @@ module Magaz
 				end
 
 				categoty.name = params[:name]
+				categoty.parent_category_id = params[:parent_category_id]
 				categoty.save!
 
 				render inline: categoty.id.to_s

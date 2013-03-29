@@ -29,6 +29,11 @@ class Spinach::Features::Category < Spinach::FeatureSteps
     fill_in 'name', with: @category_hash.name
   end
 
+  step 'I fill the subcategory name' do
+    @subcategory_hash = build(:category)
+    fill_in 'name', with: @subcategory_hash.name
+  end
+
   step 'I click on save' do
     find('.save-btn').click
   end
@@ -37,18 +42,34 @@ class Spinach::Features::Category < Spinach::FeatureSteps
     page.should have_content @category_hash.name
   end
 
+  step 'new subcategory should appear' do
+    page.should have_content @subcategory_hash.name
+  end
+
+  step 'I should see subcategory after reload page' do
+    visit admin_products_path
+    page.should have_content @subcategory_hash.name
+  end
+
   step 'category should name should be changed' do
     page.should have_selector '.category', count: 1
     page.should have_content @category_hash.name
   end
 
   step 'I click on edit category button' do
+    find('.open-actions-btn').click
     find('.edit-category-btn').click
   end
 
   step 'I click on delete category button' do
+    find('.open-actions-btn').click
     find('.detele-category-btn').click
     sleep 0.5
+  end
+
+  step 'I click on add subcategory' do
+    find('.open-actions-btn').click
+    find('.add-subcategory-btn').click
   end
 
   step 'I should not see category' do
