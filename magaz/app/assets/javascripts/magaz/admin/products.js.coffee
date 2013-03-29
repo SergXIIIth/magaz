@@ -21,9 +21,19 @@ Products.edit = ->
     @property 'id', serialize: true
     @property 'name'
     @property 'selected'
+    @property 'parent_category_id', serialize: true
+    @property 'subcategories',
+      get: ->
+        model.categories.filter (category) =>
+          category.parent_category_id == @id
+    @property 'subcategories_exist',
+      get: -> @subcategories.length > 0
 
   class Model extends Serenade.Model
     @collection 'categories'
+    @property 'top_level_categories',
+      get: -> @categories.filter (category) -> category.parent_category_id == null
+      dependOn: 'categories'
     @selection 'chosen', 
       {
         from: 'categories', 

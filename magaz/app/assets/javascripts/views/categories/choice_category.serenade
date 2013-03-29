@@ -1,0 +1,10 @@
+li.category[class:active=@selected]
+  a[href="#" event:click=select!]
+    .pull-left
+      i.icon-check.icon-white
+    @name
+    .clearfix
+  - if @subcategories_exist
+    ul.subcategories.nav.nav-pills.nav-stacked
+      - collection @subcategories
+        - view "categories/choice_category"

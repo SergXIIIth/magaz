@@ -4,12 +4,7 @@
     h3 "Выберите категии, нажимия них их"
   .modal-body
     ul.categories.nav.nav-pills.nav-stacked
-      - collection @categories
-        li.category[event:click=select class:active=@selected]
-          a[href="#"]
-            .pull-left
-              i.icon-check.icon-white
-            @name
-            .clearfix
+      - collection @top_level_categories
+        - view "categories/choice_category"
   .modal-footer
     a.btn[data-dismiss="modal" href="#"] "Закрыть"
