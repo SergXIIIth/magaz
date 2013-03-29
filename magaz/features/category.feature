@@ -56,8 +56,7 @@ Feature: Category
     And I close dialog
     Then I should see chosen category
     When I click on save
-    And I visit the product page
-    Then I should see chosen category
+    Then I should see chosen category after reload page
 
   @browser
   Scenario: Remove the product from the category

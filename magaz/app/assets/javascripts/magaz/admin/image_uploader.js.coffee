@@ -11,7 +11,7 @@ update_thumbnail_img = (thumbnail) ->
 open_crop_modal = (thumbnail) ->
   crop = null
 
-  modal = $('<div class="modal fade">Загрузка...</div>').appendTo('body')
+  modal = $('<div class="edit-image-dialog modal fade">Загрузка...</div>').appendTo('body')
   modal.load "/admin/images/#{thumbnail.data('id')}/edit", ->
     $('.save-btn', modal).click ->
       thumbnail.attr('data-crop', JSON.stringify(crop.selection()))

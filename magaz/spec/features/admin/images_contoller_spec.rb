@@ -35,12 +35,12 @@ describe Magaz::Admin::ImagesController do
     login
     visit product.edit_path
     find('img.origin').click
-    sleep(1.5)
+    sleep(0.5)
 
-    find('.modal h3').text.should == 'Картинка'
+    find('.edit-image-dialog h3').text.should == 'Картинка'
 
-    find('.modal .save-btn').click
-    sleep(1.5)
+    find('.edit-image-dialog .save-btn').click
+    sleep(0.5)
     click_on 'Сохранить'
 
     page.should have_selector('.product a')

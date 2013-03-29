@@ -105,6 +105,12 @@ class Spinach::Features::Category < Spinach::FeatureSteps
     page.should have_content @category.name
   end
 
+  step 'I should see chosen category after reload page' do
+    visit edit_admin_product_path @product
+    debug
+    page.should have_content @category.name
+  end
+
   step 'I visit the product page' do
     visit edit_admin_product_path @product
   end

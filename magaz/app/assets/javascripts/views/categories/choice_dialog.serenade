@@ -1,4 +1,4 @@
-.category-choice-dialog.modal.fade
+.category-choice-dialog.modal.fade.hide
   .modal-header
     .close[data-dismiss="modal"] "x"
     h3 "Выберите категии, нажимия них их"
