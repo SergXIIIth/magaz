@@ -1,6 +1,22 @@
 class Spinach::Features::Category < Spinach::FeatureSteps
   step 'I am user on the products page' do
     login
+  end
+
+  step 'product exist' do
+    @product = create(:product)
+  end
+
+  step 'category exist' do
+    @category = create(:category)
+  end
+
+  step 'category assigned to product' do
+    @product.category_ids << @category.id
+    @product.save!
+  end
+
+  step 'I visit the products page' do
     visit admin_products_path
   end
 
@@ -9,8 +25,8 @@ class Spinach::Features::Category < Spinach::FeatureSteps
   end
 
   step 'I fill the category name' do
-    @category = build(:category)
-    fill_in 'name', with: @category.name
+    @category_hash = build(:category)
+    fill_in 'name', with: @category_hash.name
   end
 
   step 'I click on save' do
@@ -18,16 +34,12 @@ class Spinach::Features::Category < Spinach::FeatureSteps
   end
 
   step 'new category should appear' do
-    page.should have_content @category.name
-  end
-
-  step 'category exist' do
-    @exist_category = create(:category)
+    page.should have_content @category_hash.name
   end
 
   step 'category should name should be changed' do
     page.should have_selector '.category', count: 1
-    page.should have_content @category.name
+    page.should have_content @category_hash.name
   end
 
   step 'I click on edit category button' do
@@ -40,7 +52,7 @@ class Spinach::Features::Category < Spinach::FeatureSteps
   end
 
   step 'I should not see category' do
-    page.should_not have_content @exist_category.name
+    page.should_not have_content @category.name
   end
 
   step 'I reload page' do
@@ -69,29 +81,18 @@ class Spinach::Features::Category < Spinach::FeatureSteps
   end
 
   step 'I should see chosen category' do
-    page.should have_content @exist_category.name
-  end
-
-  step 'product exist' do
-    @product = create(:product)
+    page.should have_content @category.name
   end
 
   step 'I visit the product page' do
     visit edit_admin_product_path @product
   end
 
-  step 'product with category exist' do
-    @product = create(:product)
-    @exist_category = create(:category)
-    @product.category_ids << @exist_category.id
-    @product.save!
-  end
-
-  step 'I click delete category' do
+  step 'I click on remove category from project' do
     find('.chosen-categories .delete-btn').click
   end
 
   step 'I should not see chosen category' do
-    page.should_not have_content @exist_category.name
+    page.should_not have_content @category.name
   end
 end

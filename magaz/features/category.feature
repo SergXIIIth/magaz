@@ -6,7 +6,8 @@ Feature: Category
 
   @browser
   Scenario: Create
-    Given I am user on the products page
+    Given I am user
+    And I visit the products page
     When I click on add category
     And I fill the category name 
     And I click on save
@@ -14,8 +15,9 @@ Feature: Category
 
   @browser
   Scenario: Edit
-    Given I am user on the products page
+    Given I am user
     And category exist
+    And I visit the products page
     When I click on edit category button
     And I fill the category name 
     And I click on save
@@ -23,8 +25,9 @@ Feature: Category
 
   @browser
   Scenario: Delete
-    Given I am user on the products page
+    Given I am user
     And category exist
+    And I visit the products page
     When I click on delete category button
     And I confirm delete
     Then I should not see category
@@ -48,9 +51,11 @@ Feature: Category
   @browser
   Scenario: Remove the product from the category
     Given I am user
-    And product with category exist
+    And product exist
+    And category exist
+    And category assigned to product
     And I visit the product page
-    When I click delete category
+    When I click on remove category from project
     Then I should not see chosen category
     When I click on save
     And I visit the product page

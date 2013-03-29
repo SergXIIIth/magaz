@@ -45,5 +45,6 @@ def login(user = nil)
 end
 
 def debug
+  save_and_open_page
   sleep 25
 end

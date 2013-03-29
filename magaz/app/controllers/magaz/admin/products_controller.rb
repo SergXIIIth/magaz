@@ -27,7 +27,7 @@ module Magaz
         @product.amount     = params[:amount]
         @product.desc       = params[:desc]
         @product.image_ids  = image_saver.image_ids
-        @product.category_ids  = params[:category_ids]
+        @product.category_ids  = ActiveSupport::JSON.decode(params[:category_ids])
 
         @product.save!
 

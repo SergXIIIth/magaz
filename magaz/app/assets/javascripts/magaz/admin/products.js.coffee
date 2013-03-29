@@ -14,6 +14,7 @@ Products.edit = ->
 # API
 # .choice-category-btn, .chosen-categories, .chosen-categories-ids
 @CategoryChoiceContol = ->
+  
   # --- Model
 
   class Category extends Serenade.Model
@@ -39,17 +40,18 @@ Products.edit = ->
   model = new Model()
 
   # --- Contorller
+
   class ChoiceCtrl
     constructor: ->
       $.get '/admin/categories', (categories_json) -> 
         for category_json in categories_json
           model.categories.push(new Category(category_json))
 
-        chosen_category_ids = JSON.parse($('.chosen-category-ids').data('init'))
-        for categoty_id in chosen_category_ids
-          categoty = Category.find(categoty_id)
-          categoty.selected = true
+        chosen_category_ids = $('.chosen-category-ids').data('init')
 
+        for categoty_id in chosen_category_ids
+          Category.find(categoty_id).selected = true
+          
     select: (elem, categoty) -> categoty.selected = !categoty.selected
 
   class ChosenCtrl

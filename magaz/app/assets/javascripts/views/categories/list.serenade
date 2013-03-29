@@ -1,9 +1,9 @@
 ul.nav.nav-pills.nav-stacked
   - collection @categories
     li.category[event:click=select class:active=@selected]
-      a[href="#" event:dblclick=edit]
+      a[href="#" event:dblclick=edit!]
         .truncate @name
         .buttons.pull-right
-          i.icon-edit.icon-white.edit-category-btn[event:click=edit]
-          i.icon-trash.icon-white.detele-category-btn[event:click=delete]
+          i.icon-edit.icon-white.edit-category-btn[event:click=edit!]
+          i.icon-trash.icon-white.detele-category-btn[event:click=delete!]
         .clearfix

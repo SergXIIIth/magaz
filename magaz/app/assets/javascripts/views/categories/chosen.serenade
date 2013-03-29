@@ -1,6 +1,6 @@
 - collection @chosen
   .categoty
-    span.truncate @name
+    span.name @name
     a.delete-btn[href="#" event:click=delete!]
-      i.icon-remove
+      i.muted "x"
 .clearfix
