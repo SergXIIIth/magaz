@@ -16,7 +16,7 @@ Capybara.javascript_driver = :poltergeist
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 def login
-    visit login_path
+    visit '/login'
     find('.vkontakte').click 
 end
 

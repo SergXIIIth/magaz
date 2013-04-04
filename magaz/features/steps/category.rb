@@ -94,21 +94,21 @@ class Spinach::Features::Category < Spinach::FeatureSteps
   end
 
   step 'I select category' do
-    find('.category-choice-dialog .category').click
+    find('.category-choice-dialog .category a:first').click
   end
 
   step 'I close dialog' do
     find('.close').click
+    sleep 0.5
   end
 
   step 'I should see chosen category' do
-    page.should have_content @category.name
+    find('.chosen-categories').should have_content @category.name
   end
 
   step 'I should see chosen category after reload page' do
     visit edit_admin_product_path @product
-    debug
-    page.should have_content @category.name
+    find('.chosen-categories').should have_content @category.name
   end
 
   step 'I visit the product page' do

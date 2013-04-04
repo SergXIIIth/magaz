@@ -40,6 +40,7 @@ group :test, :development do
   gem 'guard-spinach', github: 'codegram/guard-spinach'
   gem 'guard-rspec'
   
+  gem 'zeus'
 end
 
 
