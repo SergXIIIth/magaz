@@ -15,15 +15,6 @@ Capybara.javascript_driver = :poltergeist
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-def login
-    visit '/login'
-    find('.vkontakte').click 
-end
-
-def op
-  save_and_open_page
-end
-
 RSpec.configure do |config|
   # ## Mock Framework
   #
@@ -72,4 +63,6 @@ RSpec.configure do |config|
     OmniAuth.config.test_mode = true
   }
   
+
+  config.include Macros
 end

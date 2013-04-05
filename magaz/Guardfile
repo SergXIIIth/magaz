@@ -5,7 +5,7 @@ guard 'spinach', command_prefix: 'zeus', bundler: false do
   end
 end
 
-guard 'rspec', cli: '--color', zeus: true, all_on_start: false, all_after_pass: false do
+guard 'rspec', cli: '--color', all_on_start: false, all_after_pass: false do
   watch(%r{^spec/.+_spec\.rb$})
 end
 
