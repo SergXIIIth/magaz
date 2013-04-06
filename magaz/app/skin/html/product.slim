@@ -1,0 +1,13 @@
+doctype html
+html 
+  head
+    title Product
+
+  body
+    h1 Product
+    - product
+      img src=thumbnail_url
+      a.name href="/product/#{id}"
+        |Name #{name}
+      .price
+        |Price #{price}

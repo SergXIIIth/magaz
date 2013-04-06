@@ -1,0 +1,22 @@
+doctype html
+html 
+  head
+    title List of products
+  body
+    h1 List of products
+
+    .row
+      .span3
+        h2 Categories
+        - categories
+          .category
+            a.name href="/category/#{id}"
+              = name
+      .span9
+        h2 Products
+        - products
+          .product
+            a.name href="/product/#{id}"
+              |Name #{name}
+            .price
+              |Price #{price}

@@ -7,11 +7,8 @@ module Magaz
     field :price      , type: Money
     field :amount     , type: Integer
     field :desc       , type: String
-    
 
-    has_and_belongs_to_many :categories, 
-      class_name: 'Magaz::Category', 
-      inverse_of: nil
+    has_and_belongs_to_many :categories, class_name: 'Magaz::Category'
 
     has_and_belongs_to_many :images, 
       class_name: 'Magaz::Image', 

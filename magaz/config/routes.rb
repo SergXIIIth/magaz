@@ -1,6 +1,4 @@
 Magaz::Application.routes.draw do
-  root to: 'magaz/admin/base#index'
-
   namespace :admin, module: 'magaz/admin' do
     resources :products do
       post '', to: 'products#save', as: 'save', on: :member
@@ -21,6 +19,8 @@ Magaz::Application.routes.draw do
   get '/fill_email', to: 'magaz/admin/users#fill_email', as: 'fill_email'
   post '/fill_email', to: 'magaz/admin/users#fill_email_post'
 
+  root to: 'magaz/home#index'
+  get '/:page/:id(/:sub_id)', to: 'magaz/home#page'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

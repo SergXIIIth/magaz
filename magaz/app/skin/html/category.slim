@@ -1,0 +1,12 @@
+doctype html
+html 
+  head
+    title List of the products in category
+
+  body
+    h1 List of the products in category
+    - category
+      h2 Category #{name}
+      - products
+        img src=thumbnail_url
+        p Product #{name}
