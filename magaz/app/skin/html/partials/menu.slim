@@ -1,0 +1,26 @@
+.container.main-menu
+  nav.navbar
+    .navbar-inner
+      a.brand.span2 Magaz
+      ul.nav
+        li *main_menu_orders title='Заказы'
+          a href=admin_orders_path
+            i.icon.icon-lock
+
+        li *main_menu_products title='Товары'
+          a href=admin_products_path
+            i.icon.icon-th-large
+
+        li *main_menu_pages title='CMS - содержимое сайт'
+          a href='#': i.icon.icon-edit
+
+        li *main_menu_users title='Пользователи'
+          a href=admin_users_path
+            i.icon.icon-user
+
+        li title='Выйти'
+          a href=logout_path
+            i.icon.icon-off
+      ul.nav.pull-right
+        - current_user
+          li: a Здравствуйте, #{fullname}

@@ -19,8 +19,8 @@ Magaz::Application.routes.draw do
   get '/fill_email', to: 'magaz/admin/users#fill_email', as: 'fill_email'
   post '/fill_email', to: 'magaz/admin/users#fill_email_post'
 
-  root to: 'magaz/home#index'
-  get '/:page/:id(/:sub_id)', to: 'magaz/home#page'
+  root to: 'magaz/skin#index'
+  get '/:page/:id(/:sub_id)', to: 'magaz/skin#page'
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
