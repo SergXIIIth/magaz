@@ -20,6 +20,9 @@ Magaz::Application.routes.draw do
   post '/fill_email', to: 'magaz/admin/users#fill_email_post'
 
   root to: 'magaz/skin#index'
+  get '/css/:path', to: 'magaz/skin#css'
+  get '/js/:path', to: 'magaz/skin#javascript'
+  get '/img/:path.(:ext)', to: 'magaz/skin#img'
   get '/:page/:id(/:sub_id)', to: 'magaz/skin#page'
   
   # The priority is based upon order of creation:

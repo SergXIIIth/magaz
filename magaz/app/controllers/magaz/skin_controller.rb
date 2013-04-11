@@ -1,38 +1,65 @@
 # -*- encoding : utf-8 -*-
 module Magaz
-	class SkinController < Magaz::BaseController
-		def index
-			#render inline: Slim::Template.new() { 'h1 hhh' }.render(self)
-			render_skin 'index'
-		end
+  class SkinController < Magaz::BaseController
+    def index
+      #render inline: Slim::Template.new() { 'h1 hhh' }.render(self)
+      render_skin 'index'
+    end
 
-		def page
-			render_skin params[:page]
-		end
+    def css
+      path = params[:path]
+      css = Sass::Engine.new(skin_file_read("css/#{path}.sass")).render
+      headers['Content-Type'] = 'text/css'
+      render inline: css
+    end
 
-		private
+    def javascript
+    end
 
-		def render_skin(view_name)
-			view_file_path = Rails.root.join('app', 'skin', 'html', view_name + '.slim')
-			view_html = File.read(view_file_path)
+    def img
+      path = params[:path]
+      ext = params[:ext]
+      send_file skin_path("img/#{path}.#{ext}")
+    end
 
-			skin_api = SkinApi.new
-			skin_api.params = params
+    def page
+      render_skin params[:page]
+    end
 
-			view_model_file = Rails.root.join('app', 'skin', 'code', view_name + '.rb')
+  private
+    def skin_path(path)
+      fail "Bad path '#{path}'" unless path =~ /^[\/a-zA-Z0-9_]+\.?[a-zA-Z]*$/
+      Rails.root.join('app/skin/' + path)
+    end
 
-			model = if File.exist?(view_model_file)
-				wrap = Module.new
-				wrap.module_eval(File.read(view_model_file))
+    def skin_file_read(path)
+      File.read(skin_path(path))
+    end
 
-				model_class = wrap.const_get(view_name.capitalize)
-				model_class.send(:define_method, :api){ skin_api }
-				model_class.new
-			else
-				skin_api
-			end
 
-			render inline: Slim::Template.new() { view_html }.render(model)
-		end
-	end
+    def render_skin(view_name)
+      view_file_path = Rails.root.join('app', 'skin', 'html', view_name + '.slim')
+
+      view_html = File.read(view_file_path)
+      view_model_file = Rails.root.join('app', 'skin', 'code', view_name + '.rb')
+
+      model = if File.exist?(view_model_file)
+        create_view_model(view_model_file, view_name)
+      else
+        SkinApi.new(self)
+      end
+
+      render inline: Slim::Template.new() { view_html }.render(model)
+    end
+
+    def create_view_model(view_model_file, view_name)
+      wrap = Module.new
+      wrap.module_eval(File.read(view_model_file))
+      model_class = wrap.const_get(view_name.capitalize)
+      
+      model_obj = model_class.new
+      model_obj.api = SkinApi.new(self) if model_obj.respond_to? :api
+      model_obj
+    end
+  end
 end
