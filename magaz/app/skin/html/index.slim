@@ -10,8 +10,23 @@ html
         nav.span3
           = render_partial_categories_left
         .span9
-          h2 Products
-          - products
+          h2 Популярное
+          = render_partial_categories_popular
+
+          h2 Рекомендуем
+
+          - products_recomed
+            .product.row
+              .thumbnail.span2
+                img src=thumbnail_url
+              a.name href="/product/#{slug}"
+                |Name #{name}
+              .price
+                |Price #{price}          
+
+          h2 Новинки
+
+          - products_new
             .product.row
               .thumbnail.span2
                 img src=thumbnail_url

@@ -22,7 +22,7 @@ h1, h2, h3, h4
 h2
   font-size: 28px
   letter-spacing: -0.03em
-  margin: 8px 0 8px 20px
+  margin: 0 0 20px 0
   font-family: GeogrotesqueR,Arial,sans-serif
 
 
@@ -143,6 +143,32 @@ header
         background-color: #d75c04
         background-image: linear-gradient(180deg,#d05303,#d75d04)
         color: #fff
+
+.categories-popular
+  background-color: #fafafa
+  border: solid 1px #dfe9ed
+  border-radius: 5px
+  padding: 0
+  overflow: hidden
+  margin: 15px 0
+
+  .category
+    border-right: solid 1px #dfe9ed
+    border-bottom: solid 1px #dfe9ed
+    height: 165px
+    margin-left: 0
+    padding: 15px 8px 10px 10px
+
+    &:nth-child(3n+3)
+      border-right: none
+      padding-right: 10px
+
+  h3
+    font-weight: bold
+    font-family: GeogrotesqueB,Arial,sans-serif
+    font-size: 16px
+    margin: 0 15px 9px 19px
+    line-height: 17px
 
 // --------------------------------------------
 //             Pages
