@@ -5,23 +5,17 @@ html
     = render_partial_head
   body
     = render_partial_header
-    .container
-      h1 List of products
-
+    .content.container
       .row
-        .span3
-          h2 Categories
-          - categories
-            .category
-              a.name href="/category/#{id}"
-                = name
+        nav.span3
+          = render_partial_categories_left
         .span9
           h2 Products
           - products
             .product.row
               .thumbnail.span2
                 img src=thumbnail_url
-              a.name href="/product/#{id}"
+              a.name href="/product/#{slug}"
                 |Name #{name}
               .price
                 |Price #{price}

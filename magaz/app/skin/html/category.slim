@@ -1,11 +1,21 @@
 doctype html
 html 
   head
-    title List of the products in category
+    title List of products
+    = render_partial_head
   body
-    h1 List of the products in category
-    - category
-      h2 Category #{name}
-      - products
-        img src=thumbnail_url
-        p Product #{name}
+    = render_partial_header
+    .content.container
+      .row
+        nav.span3
+          = render_partial_categories_left
+        .span9
+          h2 Products
+          - products
+            .product.row
+              .thumbnail.span2
+                img src=thumbnail_url
+              a.name href="/product/#{id}"
+                |Name #{name}
+              .price
+                |Price #{price}

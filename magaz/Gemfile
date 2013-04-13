@@ -10,6 +10,7 @@ gem 'mongoid'
 gem 'coffee-views'
 gem 'draper'
 gem 'money-rails'
+gem 'mongoid_slug'
 
 gem 'carrierwave'
 gem 'cloudinary'

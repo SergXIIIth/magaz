@@ -5,6 +5,9 @@ module Magaz
 
     field :name, type: String
 
+    include Mongoid::Slug
+    slug :name, history: true
+
     belongs_to :parent_category, inverse_of: :subcategories, class_name: 'Magaz::Category'
     has_many :subcategories, inverse_of: :parent_category, class_name: 'Magaz::Category'
 
